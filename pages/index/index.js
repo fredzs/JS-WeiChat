@@ -50,5 +50,10 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  Daily: function () {
+    wx.navigateTo({
+      url: '../Daily/Daily'
+    })
   }
 })
