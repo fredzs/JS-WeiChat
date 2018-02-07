@@ -2,7 +2,7 @@ var app = getApp();
 Page({
   data: {
     // text:"这是一个页面"  
-    array: ["中国", "美国", "巴西", "日本"],
+    array: ["营业部", "首都机场", "香河园", "四元桥"],
     toast1Hidden: true,
     modalHidden: true,
     modalHidden2: true,

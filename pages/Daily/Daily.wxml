@@ -1,55 +1,30 @@
 <view id="adduser">  
     <form bindsubmit="formSubmit" bindreset="formReset">  
-         <view class="section">  
+        <view class="section">  
             <view class="section__title">姓名:</view>  
             <view class='form-group'>  
-                <input type="text" class="input-text" name="username" placeholder="请输入姓名" />  
-            </view>      
-        </view>  
-        <view class="section section_gap">  
-            <view class="section__title">年龄:</view>  
-            <view class='form-group'>  
-                <slider name="age" show-value ></slider>  
-            </view>      
-        </view>  
-        <view class="section section_gap">  
-            <view class="section__title">性别:</view>  
-            <view class='form-group'>  
-                <radio-group name="gender">  
-                  <label><radio value="1"/>男</label>  
-                  <label><radio value="0"/>女</label>  
-                </radio-group>  
-            </view>      
-        </view>  
-        <view class="section">  
-            <view class="section__title">地区选择:</view>  
-            <view class='form-group'>  
+                <input type="text" class="input-text" name="user_name" placeholder="请输入报送人姓名" />  
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">报送日期:</view>
+            <view class='form-group'>
+                <input type="text" class="input-text" name="date" placeholder="请输入报送日期" />  
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">网点名称:</view>
+            <view class='form-group'>
                 <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">  
-                    <view class="picker">  
-                        <input type="hidden" disabled="true" name="dept_name" value="{{array[index]}}"/>  
-                    </view>  
-                </picker>  
-            </view>  
-        </view>  
-        <view class="section section_gap">  
-            <view class="section__title">爱好:</view>  
-            <view class='form-group'>  
-                <checkbox-group name="hobby">  
-                    <label><checkbox value="羽毛球"/>羽毛球</label>  
-                    <label><checkbox value="游泳"/>游泳</label>  
-                </checkbox-group>  
-            </view>  
-        </view>  
-          
-        <view class="section section_gap">  
-            <view class="section__title">是否显示:</view>  
-            <view class='form-group'>  
-                 <switch name="isshow"/>  
-            </view>  
-        </view>  
-        <view class="section btn-area">  
-            <button formType="submit">提交</button>  
-            <button formType="reset">清空</button>  
+                    <view class="picker">
+                        <input type="hidden" disabled="true" name="dept_name" value="{{array[index]}}"/>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="section btn-area">
+            <button formType="submit">提交</button>
+            <button formType="reset">清空</button>
         </view>  
     </form>  
   
@@ -67,4 +42,4 @@
             <view> 清空成功 </view>  
         </modal>  
     </view>  
-</view>      
+</view>
