@@ -15,9 +15,9 @@
         <view class="section">
             <view class="section__title">网点名称:</view>
             <view class='form-group'>
-                <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">  
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{dept_list}}">  
                     <view class="picker">
-                        <input type="hidden" disabled="true" name="dept_name" value="{{array[index]}}"/>
+                        <input type="hidden" disabled="true" name="dept_name" value="{{dept_list[index]}}"/>
                     </view>
                 </picker>
             </view>

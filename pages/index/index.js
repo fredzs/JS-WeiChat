@@ -55,5 +55,10 @@ Page({
     wx.navigateTo({
       url: '../Daily/Daily'
     })
+  },
+  Admin: function () {
+    wx.navigateTo({
+      url: '../Admin/Admin'
+    })
   }
 })

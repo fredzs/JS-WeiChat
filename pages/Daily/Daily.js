@@ -2,6 +2,7 @@ var app = getApp();
 Page({
   data: {
     // text:"这是一个页面"  
+    dept_list: [],
     array: ["营业部", "首都机场", "香河园", "四元桥"],
     toast1Hidden: true,
     modalHidden: true,
@@ -52,6 +53,23 @@ Page({
     })
   },
   onLoad: function (options) {
+    var that = this;
+    //获取网点列表  
+    wx.request({
+      url: "http://127.0.0.1:5000/api/branches",
+      header: {
+        "Content-Type":"application/json"
+      },
+      success: function (res) {
+        console.log(res.data);
+        that.setData({
+          dept_list: res.data
+        });
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    })
     // 页面初始化 options为页面跳转所带来的参数  
   },
   onReady: function () {
@@ -70,7 +88,7 @@ Page({
     var that = this;
     var formData = e.detail.value;
     wx.request({
-      url: 'http://127.0.0.1:5000/api/tasks',
+      url: 'http://127.0.0.1:5000/api/submit',
       method: 'POST',
       data: formData,
       header: {

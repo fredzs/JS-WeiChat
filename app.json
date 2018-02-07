@@ -2,7 +2,9 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/Daily/Daily"
+    "pages/Daily/Daily",
+    "pages/Admin/Admin",
+    "pages/Check/Check"
   ],
   "window":{
     "backgroundTextStyle":"light",

@@ -10,6 +10,12 @@
   <view>
     <button bindtap="Daily">报送业绩</button>
   </view>
+  <view>
+    <button bindtap="Check">查看报送情况</button>
+  </view>
+  <view>
+    <button bindtap="Admin">后台维护</button>
+  </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
