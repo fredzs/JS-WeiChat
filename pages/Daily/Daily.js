@@ -1,8 +1,26 @@
 var app = getApp();
+var today = new Date();
+function date_str(date){
+  var yy = date.getFullYear()
+  var mm = date.getMonth() + 1
+  var dd = date.getDate()
+  if (mm <10) {
+    mm = '0' + mm
+  }
+  if (dd < 10) {
+    dd = '0' + dd
+  }
+  return yy+'-'+mm+'-'+dd
+};
+
 Page({
   data: {
     // text:"这是一个页面"  
-    dept_list: [],
+    dept_list: {},
+    dept_id: 1,
+    date: date_str(today),
+    submit_user: "test",
+    extra_fields: {},
     array: ["营业部", "首都机场", "香河园", "四元桥"],
     toast1Hidden: true,
     modalHidden: true,
@@ -47,13 +65,22 @@ Page({
     })
   },
   bindPickerChange: function (e) {
+    var that = this
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      index: e.detail.value
+      index: e.detail.value,
+      dept_id: that.data.dept_list[e.detail.value].dept_id
+    })
+    console.log("dept_id:", this.data.dept_id)
+  },
+  bindDateChange: function (e) {
+    console.log('Date发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date: e.detail.value
     })
   },
   onLoad: function (options) {
-    var that = this;
+    var that = this
     //获取网点列表  
     wx.request({
       url: "http://127.0.0.1:5000/api/branches",
@@ -61,10 +88,12 @@ Page({
         "Content-Type":"application/json"
       },
       success: function (res) {
-        console.log(res.data);
+        //console.log(res.data);
         that.setData({
-          dept_list: res.data
-        });
+          dept_list: res.data,
+          index: 0//res.data[0].dept_id
+        })
+        console.log(that.data.dept_list)
       },
       fail: function (err) {
         console.log(err)
@@ -87,16 +116,22 @@ Page({
   formSubmit: function (e) {
     var that = this;
     var formData = e.detail.value;
+    console.log(formData)
     wx.request({
       url: 'http://127.0.0.1:5000/api/submit',
       method: 'POST',
-      data: formData,
+      data: {
+        "dept_id":that.data.dept_id,
+        "date":that.data.date,
+        "submit_user": formData.submit_user,
+        "extra_fields":{"field1":"test"}
+      },
       header: {
         'Content-Type': 'application/json'
       },
       success: function (res) {
-        console.log(res.data)
-        that.modalTap();
+        console.log(that.data)
+        //that.modalTap();
       }
     })
   },

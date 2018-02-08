@@ -3,24 +3,26 @@
         <view class="section">  
             <view class="section__title">姓名:</view>  
             <view class='form-group'>  
-                <input type="text" class="input-text" name="user_name" placeholder="请输入报送人姓名" />  
-            </view>
-        </view>
-        <view class="section">
-            <view class="section__title">报送日期:</view>
-            <view class='form-group'>
-                <input type="text" class="input-text" name="date" placeholder="请输入报送日期" />  
+                <input type="text" class="input-text" name="submit_user" placeholder="请输入报送人姓名" />  
             </view>
         </view>
         <view class="section">
             <view class="section__title">网点名称:</view>
             <view class='form-group'>
-                <picker bindchange="bindPickerChange" value="{{index}}" range="{{dept_list}}">  
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{dept_list}}" range-key="dept_name">  
                     <view class="picker">
-                        <input type="hidden" disabled="true" name="dept_name" value="{{dept_list[index]}}"/>
+                        <input type="hidden" disabled="true" name="dept_name" value="{{dept_list[index].dept_name}}"/>
                     </view>
                 </picker>
             </view>
+        </view>
+        <view class="section">
+            <view class="section__title">报送日期:</view>
+                <picker mode="date" value="{{date}}" start="2018-02-01" end="2018-09-01" bindchange="bindDateChange">
+                    <view class="picker">
+                        {{date}}
+                    </view>
+                </picker>
         </view>
         <view class="section btn-area">
             <button formType="submit">提交</button>
