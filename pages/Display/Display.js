@@ -1,13 +1,46 @@
 // pages/Display/Display.js
-Page({
+const date = new Date()
+const years = []
+const months = []
+const days = []
+const depts = []
 
+for (let i = 2018; i <= date.getFullYear(); i++) {
+  years.push(i)
+}
+for (let i = 1; i <= 12; i++) {
+  months.push(i)
+}
+for (let i = 1; i <= 31; i++) {
+  days.push(i)
+}
+Page({
   /**
    * 页面的初始数据
    */
   data: {
-  
+    // text:"这是一个页面"  
+    years: years,
+    year: date.getFullYear(),
+    months: months,
+    month: 2,
+    days: days,
+    day: 9,
+    year: date.getFullYear(),
+    value: [9999, 1, 1, 1],
   },
-
+  bindChange: function (e) {
+    console.log('Date发送选择改变，携带值为', e.detail.value)
+    const val = e.detail.value
+    this.setData({
+      year: this.data.years[val[0]],
+      month: this.data.months[val[1]],
+      day: this.data.days[val[2]]
+    })
+    this.setData({
+      value: [this.data.year, this.data.month - 1, this.data.day - 1]
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

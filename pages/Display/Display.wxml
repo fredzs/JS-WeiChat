@@ -1,2 +1,17 @@
 <!--pages/Display/Display.wxml-->
-<text>pages/Display/Display.wxml</text>
+<view>
+  <picker-view indicator-style="height: 50px;" style="width: 80%; height: 150px;" value="{{value}}" bindchange="bindChange">
+    <picker-view-column>
+      <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{days}}" style="line-height: 50px">{{item}}日</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{depts}}" style="line-height: 50px">{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>

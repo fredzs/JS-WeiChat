@@ -13,28 +13,13 @@ for (let i = 1; i <= 12; i++) {
 for (let i = 1; i <= 31; i++) {
   days.push(i)
 }
-var today = new Date();
-function date_str(date) {
-  var yy = date.getFullYear()
-  var mm = date.getMonth() + 1
-  var dd = date.getDate()
-  if (mm < 10) {
-    mm = '0' + mm
-  }
-  if (dd < 10) {
-    dd = '0' + dd
-  }
-  return yy + '-' + mm + '-' + dd
-};
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     // text:"这是一个页面"  
     check_list: {},
-    date: date_str(today),
     years: years,
     year: date.getFullYear(),
     months: months,
