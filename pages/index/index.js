@@ -56,6 +56,16 @@ Page({
       url: '../Daily/Daily'
     })
   },
+  Check: function () {
+    wx.navigateTo({
+      url: '../Check/Check'
+    })
+  },
+  Display: function () {
+    wx.navigateTo({
+      url: '../Display/Display'
+    })
+  },
   Admin: function () {
     wx.navigateTo({
       url: '../Admin/Admin'

@@ -1,47 +1,60 @@
-<view id="adduser">  
-    <form bindsubmit="formSubmit" bindreset="formReset">  
+<view id="daily">
+  <view class="section">  
+    <view class="section__title__short">报送人姓名:</view>
+    <view class='form-group'>  
+        <input name="submit_user" placeholder="请输入报送人姓名" class='input-text' bindblur="submint_user_input"/>  
+    </view>
+  </view>
+  <view class="section">
+      <view class="section__title__short">网点名称:</view>
+      <view class='form-group'>
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{dept_list}}" range-key="dept_name">  
+              <view class="picker">
+                  {{dept_list[index].dept_name}}
+              </view>
+          </picker>
+      </view>
+  </view>
+  <view class="section">
+      <view class="section__title__short">报送日期:</view>
+      <view class='form-group'>
+        <picker mode="date" value="{{date}}" start="2018-02-01" end="2018-09-01" bindchange="bindDateChange">
+            <view class="picker">
+                {{date}}
+            </view>
+        </picker>
+      </view>
+  </view>
+  <form bindsubmit="formSubmit" bindreset="formReset">  
+      <view wx:for="{{fields_name}}" wx:key="field_name">
         <view class="section">  
-            <view class="section__title">姓名:</view>  
-            <view class='form-group'>  
-                <input type="text" class="input-text" name="submit_user" placeholder="请输入报送人姓名" />  
-            </view>
+          <view class="section__title">
+            {{item.field_name}}:
+          </view>
         </view>
-        <view class="section">
-            <view class="section__title">网点名称:</view>
-            <view class='form-group'>
-                <picker bindchange="bindPickerChange" value="{{index}}" range="{{dept_list}}" range-key="dept_name">  
-                    <view class="picker">
-                        <input type="hidden" disabled="true" name="dept_name" value="{{dept_list[index].dept_name}}"/>
-                    </view>
-                </picker>
-            </view>
+        <view class="section">  
+          <input type="text" name="{{fields_name[index].field_id}}" class='input-text' value="100"/>
         </view>
-        <view class="section">
-            <view class="section__title">报送日期:</view>
-                <picker mode="date" value="{{date}}" start="2018-02-01" end="2018-09-01" bindchange="bindDateChange">
-                    <view class="picker">
-                        {{date}}
-                    </view>
-                </picker>
-        </view>
-        <view class="section btn-area">
-            <button formType="submit">提交</button>
-            <button formType="reset">清空</button>
-        </view>  
-    </form>  
-  
-     <!-- 黑框提示并消失 -->  
-    <toast hidden="{{toast1Hidden}}" bindchange="toast1Change">  
-        {{notice_str}}  
-    </toast>  
-    <!-- 确认框 及 提示框 -->  
-    <view class="page__bd">  
-        <modal title="确认" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">  
-            确认提交么？  
-        </modal>  
-        <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">  
-            <view> 提示 </view>  
-            <view> 清空成功 </view>  
-        </modal>  
-    </view>  
+      </view>
+      <view class="section btn-area">
+          <button formType="submit">提交</button>
+          <button formType="reset">清空</button>
+      </view>  
+  </form>
+    <!-- 黑框提示并消失 -->  
+  <toast hidden="{{toast1Hidden}}" bindchange="toast1Change">  
+      {{notice_str}}  
+  </toast>  
+  <!-- 确认框 及 提示框 -->  
+  <view class="page__bd">  
+      <modal title="确认" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">  
+          确认提交么？  
+      </modal>  
+      <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">  
+          <view> 清空成功 </view>  
+      </modal>
+      <modal class="modal" hidden="{{modalHidden3}}" no-cancel bindconfirm="modalChange3" bindcancel="modalChange3">  
+          <view> 存在空白项，请填写完整再提交！ </view>  
+      </modal>  
+  </view>  
 </view>
