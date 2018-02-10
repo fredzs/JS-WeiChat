@@ -18,7 +18,7 @@
   <view class="section">
       <view class="section__title__short">报送日期:</view>
       <view class='form-group'>
-        <picker mode="date" value="{{date}}" start="2018-02-01" end="2018-09-01" bindchange="bindDateChange">
+        <picker mode="date" value="{{date}}" start="2018-02-01" end="{{date}}" bindchange="bindDateChange">
             <view class="picker">
                 {{date}}
             </view>

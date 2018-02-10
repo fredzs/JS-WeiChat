@@ -1,0 +1,12 @@
+<view>
+  <button bindtap="fields">字段维护</button>
+</view>
+<view>
+  <button bindtap="order">字段排序</button>
+</view>
+<view>
+  <button bindtap="depts">网点维护</button>
+</view>
+<view>
+  <button bindtap="detting">设置</button>
+</view>

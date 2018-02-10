@@ -62,5 +62,26 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  fields: function () {
+    wx.navigateTo({
+      url: '../Fields/Fields'
+    })
+  },
+  order: function () {
+    wx.navigateTo({
+      url: '../Fields/Order'
+    })
+  },
+  depts: function () {
+    wx.navigateTo({
+      url: '../Depts/Depts'
+    })
+  },
+  setting: function () {
+    wx.navigateTo({
+      url: '../Setting/Setting'
+    })
+  },
 })

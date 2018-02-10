@@ -7,7 +7,7 @@ const days = []
 for (let i = 2018; i <= date.getFullYear(); i++) {
   years.push(i)
 }
-for (let i = 1; i <= 12; i++) {
+for (let i = 1; i <= date.getMonth() + 1; i++) {
   months.push(i)
 }
 for (let i = 1; i <= 31; i++) {

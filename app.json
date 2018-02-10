@@ -5,7 +5,9 @@
     "pages/Daily/Daily",
     "pages/Admin/Admin",
     "pages/Check/Check",
-    "pages/Display/Display"
+    "pages/Display/Display",
+    "pages/Fields/Fields",
+    "pages/Fields/Order"
   ],
   "window": {
     "backgroundTextStyle": "light",
