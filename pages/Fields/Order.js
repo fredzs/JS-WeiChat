@@ -1,41 +1,49 @@
 // pages/Fields/Order.js
 var app = getApp();
-var x, y, x1, y1, x2, y2, index, currindex, n, yy;
-var arr1 = [{ content: 11, id: 1 }, { content: 22, id: 2 }, { content: 33, id: 3 }, { content: 44, id: 4 }, { content: 55, id: 5 }];
-Page({
+var x, y, x1, y1, x2, y2, index, n, yy;
 
-  /**
-   * 页面的初始数据
-   */
+var current_index = 0;
+var start_point = { x: 0, y: 0 };
+var box_offset = { x: 0, y: 0 };
+var end_point = { x: 0, y: 0 };
+var new_order = [];
+Page({
   data: {
     mainx: 0,
-    content: [{ content: 11, id: 1 }, { content: 22, id: 2 }, { content: 33, id: 3 }, { content: 44, id: 4 }, { content: 55, id: 5 }],
-    start: { x: 0, y: 0 }
+    start_point: { x: 0, y: 0 },
+    fields: [],
   },
+  // 开始触摸
   movestart: function (e) {
-    currindex = e.target.dataset.index;
-    x = e.touches[0].clientX;
-    y = e.touches[0].clientY;
-    x1 = e.currentTarget.offsetLeft;
-    y1 = e.currentTarget.offsetTop;
+    current_index = e.target.dataset.index;
+    start_point = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+    box_offset = { x: e.currentTarget.offsetLeft, y: e.currentTarget.offsetTop}
+    console.log(current_index, start_point, box_offset)
   },
+  //触摸点移动
   move: function (e) {
-    yy = e.currentTarget.offsetTop;
-    x2 = e.touches[0].clientX - x + x1;
-    y2 = e.touches[0].clientY - y + y1;
+    //yy = e.currentTarget.offsetTop;
+    end_point = { x: e.touches[0].clientX - start_point.x + box_offset.x, y: e.touches[0].clientY - start_point.y + box_offset.y }
+    // x2 = e.touches[0].clientX - x + x1;
+    // y2 = e.touches[0].clientY - y + y1;
+    // console.log(end_point)
     this.setData({
-      mainx: currindex,
+      mainx: current_index,
       opacity: 0.7,
-      start: { x: x2, y: y2 }
+      start_point: { x: end_point.x, y: end_point.y }
     })
   },
+  //触摸结束
   moveend: function () {
+    y2 = end_point.y
     if (y2 != 0) {
-      var arr = [];
-      for (var i = 0; i < this.data.content.length; i++) {
-        arr.push(this.data.content[i]);
+      var old_order = [];
+      for (var i = 0; i < this.data.fields.length; i++) {
+        var obj = this.data.fields[i].order_index
+        old_order.push(obj);
       }
-      var nx = this.data.content.length;
+      console.log("old_order", old_order);
+      var nx = this.data.fields.length;
       n = 1;
       for (var k = 2; k < nx; k++) {
         if (y2 > (52 * (k - 1) + k * 2 - 26)) {
@@ -45,78 +53,38 @@ Page({
       if (y2 > (52 * (nx - 1) + nx * 2 - 26)) {
         n = nx;
       }
-      console.log(arr);
-      console.log(arr1)
-      arr.splice((currindex - 1), 1);
-      arr.splice((n - 1), 0, arr1[currindex - 1]);
-      arr1 = [];
-      for (var m = 0; m < this.data.content.length; m++) {
-        console.log(arr[m]);
-        arr[m].id = m + 1;
-        arr1.push(arr[m]);
+      old_order.splice((current_index - 1), 1);
+      console.log("old_order", old_order);
+      old_order.splice((n - 1), 0, new_order[current_index - 1]);
+      console.log("old_order", old_order);
+      new_order = [];
+      for (var m = 0; m < this.data.fields.length; m++) {
+        old_order[m] = m + 1;
+        new_order.push(old_order[m]);
       }
-      // console.log(arr1);
+      console.log("old_order", old_order);
+      console.log("new_order", new_order);
       this.setData({
         mainx: "",
-        content: arr,
+        fields: old_order,
         opacity: 1
       })
     }
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
+    var that = this
+    wx.request({
+      url: "https://fredirox.com/api/fields",
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        console.log("/api/fields返回值：")
+        console.log(res.data)
+        that.setData({
+          fields: res.data,
+        })
+      },
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

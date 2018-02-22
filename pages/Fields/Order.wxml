@@ -1,6 +1,6 @@
 <!--pages/Fields/Order.wxml-->
 <view class="container">
   <view bindtap="box" class="box">
-    <view disable-scroll="true" wx:for="{{content}}" wx:key="order" bindtouchmove="move" bindtouchstart="movestart" bindtouchend="moveend" data-index="{{item.id}}" data-main="{{mainx}}" class="main {{mainx == item.id? 'mainmove':'mainend'}}" style="left:{{start.x}}px; top:{{start.y}}px">{{item.content}}</view>
+    <view disable-scroll="true" wx:for="{{fields}}" wx:key="order" bindtouchmove="move" bindtouchstart="movestart" bindtouchend="moveend" data-index="{{item.id}}" data-main="{{mainx}}" class="main {{mainx == item.id? 'mainmove':'mainend'}}" style="left:{{start_point.x}}px; top:{{start_point.y}}px">{{item.field_name}}</view>
   </view>
 </view>

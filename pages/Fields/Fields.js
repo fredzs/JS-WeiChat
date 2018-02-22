@@ -9,7 +9,7 @@ Page({
     type_list:["string","int","bool"],
     type_index: {"string":0,"int":1, "bool":2},
     status_list: [false, true],
-    status_index: { 0: false, 1: true},
+    status_index: {false:0, true:1},
     index: 1,
   },
 
@@ -30,7 +30,6 @@ Page({
           fields: res.data,
           index: 0,
         })
-        //console.log(that.data.depts)
       },
     })
   },
@@ -61,8 +60,7 @@ Page({
   },
   bindSwitchChange: function (e) {
     var that = this
-    console.log('picker发送选择改变，携带值为', e.detail.value, this.data.status_index[e.detail.value])
-    console.log(e)
+    console.log('picker发送选择改变，携带值为', e.detail.value)
     wx.request({
       url: 'https://fredirox.com/api/update_field',
       method: 'POST',
@@ -75,7 +73,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (res) {
-        //console.log(that.data.fields)
+        console.log("已更新字段：", res.data)
       }
     })
     var v = that.data.fields

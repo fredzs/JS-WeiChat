@@ -86,7 +86,8 @@
   clear: both;
   width: 90%;
   position:relative;
-  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 2px;
 }
 
 .input-text {
