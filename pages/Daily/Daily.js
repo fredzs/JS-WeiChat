@@ -16,6 +16,7 @@ function date_str(date){
 Page({
   data: {
     // text:"这是一个页面"  
+    nick_name: "",
     dept_list: {},
     fields_name:{},
     dept_id: 1,
@@ -127,6 +128,9 @@ Page({
     })
   },
   onLoad: function (options) {
+    this.setData({
+      nick_name: app.globalData.userInfo.nickName
+    })
     var that = this
     //获取网点列表  
     wx.request({

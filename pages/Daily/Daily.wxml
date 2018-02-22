@@ -2,7 +2,7 @@
   <view class="section">  
     <view class="section__title__short">报送人姓名:</view>
     <view class='form-group'>  
-        <input name="submit_user" placeholder="请输入报送人姓名" class='input-text' bindblur="submint_user_input"/>  
+        <input name="submit_user" value='{{nick_name}}' class='input-text' bindblur="submint_user_input" disabled='true'/>  
     </view>
   </view>
   <view class="section">
