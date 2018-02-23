@@ -140,11 +140,11 @@ Page({
         "Content-Type":"application/json"
       },
       success: function (res) {
-        //console.log(res.data);
         that.setData({
           dept_list: res.data,
           index: 0//res.data[0].dept_id
         })
+        console.log("/api/branches返回值：")
         console.log(that.data.dept_list)
       },
       fail: function (err) {
@@ -161,6 +161,7 @@ Page({
         that.setData({
           fields_name: res.data,
         })
+        console.log("/api/fields_name返回值：")
         console.log(that.data.fields_name)
       },
       fail: function (err) {

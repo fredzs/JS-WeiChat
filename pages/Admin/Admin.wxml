@@ -1,5 +1,5 @@
 <view>
-  <button bindtap="field_create">字段新增</button>
+  <button bindtap="field_create">字段新增（开发中）</button>
 </view>
 <view>
   <button bindtap="fields_config">字段配置</button>

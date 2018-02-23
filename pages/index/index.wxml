@@ -7,17 +7,11 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <view>
-    <button bindtap="Daily">报送业绩</button>
+  <view class="button">
+    <button type="primary" bindtap="Daily">报送当日对公业绩</button>
   </view>
-  <view>
-    <button bindtap="Check">查看报送情况</button>
-  </view>
-  <view>
-    <button bindtap="Display">浏览每日业绩</button>
-  </view>
-  <view>
-    <button bindtap="Admin">后台维护</button>
+  <view class="button">
+    <button type="primary" bindtap="Manage">管理员页面</button>
   </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>

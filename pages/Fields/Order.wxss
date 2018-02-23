@@ -9,7 +9,7 @@
   box-sizing: border-box;
 }
 .box {
-  width: 300px;
+  width: 350px;
   position: relative;
 }
 .main {

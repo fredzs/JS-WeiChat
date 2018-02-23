@@ -33,12 +33,12 @@
           </view>
         </view>
         <view class="section">  
-          <input type="text" name="{{fields_name[index].field_id}}" class='input-text' value="100"/>
+          <input type="{{fields_name[index].field_type == 'string'? 'text':'digit'}}" name="{{fields_name[index].field_id}}" class='input-text' value="100"/>
         </view>
       </view>
       <view class="section btn-area">
-          <button formType="submit">提交</button>
-          <button formType="reset">清空</button>
+          <button type="primary" formType="submit" class="submit_button">提交</button>
+          <button type="warn" formType="reset" class="submit_button">清空</button>
       </view>  
   </form>
     <!-- 黑框提示并消失 -->  

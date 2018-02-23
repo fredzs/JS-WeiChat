@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/index/Manage",
     "pages/logs/logs",
     "pages/Daily/Daily",
     "pages/Admin/Admin",
