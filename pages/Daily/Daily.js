@@ -87,7 +87,6 @@ Page({
         });
       }
     })
-    
   },
   cancel_one: function (e) {
     console.log(e);

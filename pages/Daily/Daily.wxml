@@ -41,7 +41,7 @@
           <button type="warn" formType="reset" class="submit_button">清空</button>
       </view>  
   </form>
-    <!-- 黑框提示并消失 -->  
+  <!-- 黑框提示并消失 -->  
   <toast hidden="{{toast1Hidden}}" bindchange="toast1Change">  
       {{notice_str}}  
   </toast>  

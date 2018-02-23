@@ -15,7 +15,6 @@
 <view class="section">
   <view class="section__title">未报送业绩网点：</view>
   <view wx:if="{{length_2 > 0}}">
-    <view class="section_title_left">网点</view>
     <view wx:for="{{check_list.unsubmission_list}}" wx:key="dept_name">
       <view class="section__left"><text class="field_value">{{item.dept_name}}</text></view>
     </view>
