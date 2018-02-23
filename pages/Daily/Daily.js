@@ -33,9 +33,10 @@ Page({
   check_input: function(){
     var f = this.data.extra_fields
     var l = this.data.fields_name
-    if (this.data.submit_user == "") {
-      return false
-    }
+    // if (this.data.submit_user == "") {
+    //   console.log("报送人姓名为空：" + this.data.submit_user)
+    //   return false
+    // }
     for (var field in l){
       if(f[l[field].field_id]==""){
         return false
@@ -71,7 +72,7 @@ Page({
       data: {
         "dept_id": that.data.dept_id,
         "date": that.data.date,
-        "submit_user": that.data.submit_user,
+        "submit_user": that.data.nick_name,//that.data.submit_user,
         "extra_fields": that.data.extra_fields
       },
       header: {

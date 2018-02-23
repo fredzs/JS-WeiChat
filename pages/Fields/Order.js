@@ -17,16 +17,17 @@ Page({
   movestart: function (e) {
     current_index = e.target.dataset.index;
     start_point = { x: e.touches[0].clientX, y: e.touches[0].clientY }
-    box_offset = { x: e.currentTarget.offsetLeft, y: e.currentTarget.offsetTop}
-    console.log(current_index, start_point, box_offset)
+    box_offset = { x: e.currentTarget.offsetLeft, y: e.currentTarget.offsetTop }
+    //console.log(current_index, start_point, box_offset)
   },
   //触摸点移动
   move: function (e) {
+    //console.log(e.target)
     //yy = e.currentTarget.offsetTop;
     end_point = { x: e.touches[0].clientX - start_point.x + box_offset.x, y: e.touches[0].clientY - start_point.y + box_offset.y }
     // x2 = e.touches[0].clientX - x + x1;
     // y2 = e.touches[0].clientY - y + y1;
-    // console.log(end_point)
+    // console.log("current_index" + current_index)
     this.setData({
       mainx: current_index,
       opacity: 0.7,
@@ -35,14 +36,20 @@ Page({
   },
   //触摸结束
   moveend: function () {
+    var that = this
     y2 = end_point.y
     if (y2 != 0) {
       var old_order = [];
       for (var i = 0; i < this.data.fields.length; i++) {
-        var obj = this.data.fields[i].order_index
+        var obj = {
+          id: this.data.fields[i].id,
+          order_index: this.data.fields[i].order_index,
+          field_name: this.data.fields[i].field_name,
+          field_id: this.data.fields[i].field_id
+        }
         old_order.push(obj);
       }
-      console.log("old_order", old_order);
+      //console.log("old_order", old_order);
       var nx = this.data.fields.length;
       n = 1;
       for (var k = 2; k < nx; k++) {
@@ -53,19 +60,35 @@ Page({
       if (y2 > (52 * (nx - 1) + nx * 2 - 26)) {
         n = nx;
       }
-      old_order.splice((current_index - 1), 1);
-      console.log("old_order", old_order);
-      old_order.splice((n - 1), 0, new_order[current_index - 1]);
-      console.log("old_order", old_order);
+      var temp = old_order.splice((current_index - 1), 1)[0];
+      //console.log("old_order", old_order);
+      old_order.splice((n - 1), 0, temp);
+      //console.log("old_order", old_order);
       new_order = [];
       for (var m = 0; m < this.data.fields.length; m++) {
-        old_order[m] = m + 1;
-        new_order.push(old_order[m]);
+        var item = {}
+        item = { "id": old_order[m].id,"new_order": m+1}
+        new_order.push(item);
+        old_order[m].id = m + 1;
       }
-      console.log("old_order", old_order);
+      // console.log("old_order", old_order);
       console.log("new_order", new_order);
+
+      wx.request({
+        url: 'https://fredirox.com/api/sort_field',
+        method: 'POST',
+        data: {
+          "new_order": new_order
+        },
+        header: {
+          'Content-Type': 'application/json'
+        },
+        success: function (res) {
+          //console.log(that.data.fields)
+        }
+      })
       this.setData({
-        mainx: "",
+        mainx: 0,
         fields: old_order,
         opacity: 1
       })
