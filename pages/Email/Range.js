@@ -1,12 +1,13 @@
-// pages/index/Manage.js
+// pages/Email/Month.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+  
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -61,27 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-
-
-  Check: function () {
-    wx.navigateTo({
-      url: '../Check/Check'
-    })
-  },
-  Email: function () {
-    wx.navigateTo({
-      url: '../Email/Email'
-    })
-  },
-  Display: function () {
-    wx.navigateTo({
-      url: '../Display/Display'
-    })
-  },
-  Admin: function () {
-    wx.navigateTo({
-      url: '../Admin/Admin'
-    })
   }
 })

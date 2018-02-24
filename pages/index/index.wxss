@@ -1,8 +1,16 @@
 /**index.wxss**/
+
 .userinfo {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.input-text {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .userinfo-avatar {
@@ -22,4 +30,9 @@
 
 .button {
   margin-top: 30px;
+}
+
+.modal {
+  position: relative; /*启用相对定位*/
+  top: 50px; /*相对于自己往右偏离150*/
 }

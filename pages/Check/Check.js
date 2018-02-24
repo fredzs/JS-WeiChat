@@ -49,13 +49,13 @@ Page({
         "date": this.data.year + "-" + this.data.month + "-" + this.data.day
       },
       success: function (res) {
+        console.log("/api/check返回值：")
+        console.log(res.data)
         that.setData({
           check_list: res.data,
           length_1: res.data.submission_list.length,
           length_2: res.data.unsubmission_list.length,
         })
-        console.log(that.data.check_list)
-        console.log(that.data.length_1, that.data.length_2)
       },
       fail: function (err) {
         console.log(err)
@@ -76,13 +76,13 @@ Page({
         "Content-Type": "application/json"
       },
       success: function (res) {
+        console.log("/api/check返回值：")
+        console.log(res.data)
         that.setData({
           check_list: res.data,
           length_1: res.data.submission_list.length,
           length_2: res.data.unsubmission_list.length,
         })
-        console.log(that.data.check_list)
-        console.log(that.data.length_1, that.data.length_2)
       },
       fail: function (err) {
         console.log(err)

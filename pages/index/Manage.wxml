@@ -7,6 +7,9 @@
     <button type="primary" bindtap="Display">浏览每日业绩</button>
   </view>
   <view class="button">
+    <button type="primary" bindtap="Email">业绩汇总</button>
+  </view>
+  <view class="button">
     <button type="primary" bindtap="Admin">后台维护</button>
   </view>
 </view>

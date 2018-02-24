@@ -1,0 +1,27 @@
+/* pages/Email/Email.wxss */
+
+.button {
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+.date {
+  clear: both;
+  margin: auto;
+}
+
+.picker {
+  padding: 5px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.left {
+  width: 150px;
+  float: left;
+}
+
+.right {
+  width: 150px;
+  float: right;
+}

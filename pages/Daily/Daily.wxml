@@ -1,7 +1,7 @@
 <view id="daily">
   <view class="section">  
     <view class="section__title__short">报送人姓名:</view>
-    <view class='form-group'>  
+    <view class='form-group'>
         <input name="submit_user" value='{{nick_name}}' class='input-text' bindblur="submint_user_input" disabled='true'/>  
     </view>
   </view>
@@ -49,12 +49,12 @@
   <view class="page__bd">  
       <modal title="确认" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">  
           确认提交么？  
-      </modal>  
-      <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">  
-          <view> 清空成功 </view>  
       </modal>
-      <modal class="modal" hidden="{{modalHidden3}}" no-cancel bindconfirm="modalChange3" bindcancel="modalChange3">  
-          <view> 存在空白项，请填写完整再提交！ </view>  
-      </modal>  
-  </view>  
+      <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">
+          <view> 清空成功 </view>
+      </modal>
+      <modal class="modal" hidden="{{modalHidden3}}" no-cancel bindconfirm="modalChange3" bindcancel="modalChange3">
+          <view> 存在空白项，请填写完整再提交！ </view>
+      </modal>
+  </view>
 </view>

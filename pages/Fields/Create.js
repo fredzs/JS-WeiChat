@@ -34,7 +34,7 @@ Page({
   confirm_one: function () {
     var that = this;
     wx.request({
-      url: 'https://127.0.0.1:5000/api/create_field',
+      url: 'https://fredirox.com/api/create_field',
       method: 'POST',
       data: {
         "field_name": that.data.field_name,

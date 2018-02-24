@@ -11,7 +11,10 @@
     "pages/Fields/Order",
     "pages/Fields/Create",
     "pages/Depts/Depts",
-    "pages/Admin/Setting"
+    "pages/Admin/Setting",
+    "pages/Email/Email",
+    "pages/Email/Day",
+    "pages/Email/Range"
   ],
   "window": {
     "backgroundTextStyle": "light",
