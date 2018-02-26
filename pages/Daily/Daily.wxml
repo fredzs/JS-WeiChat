@@ -29,11 +29,11 @@
       <view wx:for="{{fields_name}}" wx:key="field_name">
         <view class="section">  
           <view class="section__title">
-            {{item.field_name}}:
+            {{item.field_name}}<text style="color:red">*</text>:
           </view>
         </view>
         <view class="section">  
-          <input type="{{fields_name[index].field_type == 'string'? 'text':'digit'}}" name="{{fields_name[index].field_id}}" class='input-text' value="100"/>
+          <input type="{{fields_name[index].field_type == 'string'? 'text':'digit'}}" name="{{fields_name[index].field_id}}" class='input-text' value=""/>
         </view>
       </view>
       <view class="section btn-area">

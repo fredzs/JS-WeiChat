@@ -8,7 +8,7 @@
     </block>
   </view>
   <view class="button">
-    <button type="primary" bindtap="Daily">报送当日对公业绩</button>
+    <button type="primary" bindtap="Daily">报送当日业绩</button>
   </view>
   <view class="button">
     <button type="primary" bindtap="Manage">管理员页面</button>
@@ -22,6 +22,6 @@
 </toast>
 <view class="page__bd">
   <modal class="modal" title="请输入管理员密码" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">
-      <input name="admin_password" value='{{admin_password}}' class='input-text' type="number" bindblur="bind_password_change" password='true'/>
+      <input name="admin_password" value='{{admin_password}}' class='input-text' type="number" bindblur="bind_password_change" bindinput='bind_password_input' password='true'/>
   </modal>
 </view>

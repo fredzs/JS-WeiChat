@@ -66,6 +66,11 @@ Page({
       admin_password: e.detail.value
     })
   },
+  bind_password_input: function (e) {
+    this.setData({
+      admin_password: e.detail.value
+    })
+  },
   toast1Change: function (e) {
     this.setData({ toast1Hidden: true });
   },
@@ -77,6 +82,7 @@ Page({
   },
   confirm_one: function () {
     var that = this
+    console.log("admin_password:" + this.data.admin_password)
     wx.request({
       url: 'https://fredirox.com/api/admin',
       data: {
