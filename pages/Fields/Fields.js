@@ -33,7 +33,29 @@ Page({
       },
     })
   },
-
+  bind_unit_change: function (e) {
+    var that = this
+    console.log('field_unit改变，携带值为', e.detail.value)
+    wx.request({
+      url: 'https://fredirox.com/api/update_field',
+      method: 'POST',
+      data: {
+        "field_id": e.currentTarget.dataset.id,
+        "update_k": "field_unit",
+        "update_v": e.detail.value,
+      },
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        if (res.data == "success") {
+          console.log("已更新字段")
+        } else {
+          console.log("更新字段失败：" + res.data)
+        }
+      }
+    })
+  },
   bindPickerChange: function (e) {
     var that = this
     console.log('picker发送选择改变，携带值为', this.data.type_list[e.detail.value])
@@ -49,7 +71,11 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (res) {
-        //console.log(that.data.fields)
+        if (res.data == "success") {
+          console.log("已更新字段")
+        } else {
+          console.log("更新字段失败：" + res.data)
+        }
       }
     })
     var v = that.data.fields
@@ -73,7 +99,11 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (res) {
-        console.log("已更新字段：", res.data)
+        if (res.data == "success") {
+          console.log("已更新字段")
+        } else {
+          console.log("更新字段失败：" + res.data)
+        }
       }
     })
     var v = that.data.fields

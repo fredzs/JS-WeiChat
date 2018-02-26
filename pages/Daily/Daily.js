@@ -27,6 +27,7 @@ Page({
     modalHidden: true,
     modalHidden2: true,
     modalHidden3: true,
+    modalHidden4: true,
     notice_str: '',
     index: 0
   },
@@ -83,8 +84,16 @@ Page({
         that.setData({
           modalHidden: true,
           toast1Hidden: false,
-          notice_str: '提交成功'
-        });
+        })
+        if (res.data == "success") {
+          that.setData({
+            notice_str: '提交成功'
+          });
+        } else {
+          that.setData({
+            notice_str: '提交失败：' + res.data
+          });
+        }
       }
     })
   },
@@ -112,6 +121,11 @@ Page({
       modalHidden3: true
     })
   },
+  modalChange4: function (e) {
+    wx.navigateTo({
+      url: '../index/index'
+    })
+  },
   bindPickerChange: function (e) {
     var that = this
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -127,9 +141,12 @@ Page({
       date: e.detail.value
     })
   },
+  hi: function () {
+
+  },
   onLoad: function (options) {
     this.setData({
-      nick_name: app.globalData.userInfo.nickName
+      nick_name: app.globalData.userInfo.nickName,
     })
     var that = this
     //获取网点列表  
@@ -139,12 +156,18 @@ Page({
         "Content-Type":"application/json"
       },
       success: function (res) {
-        that.setData({
-          dept_list: res.data,
-          index: 0//res.data[0].dept_id
-        })
         console.log("/api/branches返回值：")
-        console.log(that.data.dept_list)
+        console.log(res.data)
+        if (res.statusCode == 502){
+          that.setData({
+            modalHidden4: false
+          })
+        }else {
+          that.setData({
+            dept_list: res.data,
+            index: 0, //res.data[0].dept_id
+          })
+        }
       },
       fail: function (err) {
         console.log(err)
@@ -156,12 +179,17 @@ Page({
         "Content-Type": "application/json"
       },
       success: function (res) {
-        //console.log(res.data);
-        that.setData({
-          fields_name: res.data,
-        })
         console.log("/api/fields_name返回值：")
-        console.log(that.data.fields_name)
+        console.log(res.data)
+        if (res.statusCode == 502) {
+          that.setData({
+            modalHidden4: false
+          })
+        }else{
+          that.setData({
+            fields_name: res.data,
+          })
+        }
       },
       fail: function (err) {
         console.log(err)

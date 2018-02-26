@@ -1,60 +1,68 @@
 <view id="daily">
-  <view class="section">  
+  <view class="section">
     <view class="section__title__short">报送人姓名:</view>
     <view class='form-group'>
-        <input name="submit_user" value='{{nick_name}}' class='input-text' bindblur="submint_user_input" disabled='true'/>  
+      <input name="submit_user" value='{{nick_name}}' class='input-text' bindblur="submint_user_input" disabled='true' />
     </view>
   </view>
   <view class="section">
-      <view class="section__title__short">网点名称:</view>
-      <view class='form-group'>
-          <picker bindchange="bindPickerChange" value="{{index}}" range="{{dept_list}}" range-key="dept_name">  
-              <view class="picker">
-                  {{dept_list[index].dept_name}}
-              </view>
-          </picker>
-      </view>
+    <view class="section__title__short">网点名称:</view>
+    <view class='form-group'>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{dept_list}}" range-key="dept_name">
+        <view class="picker">
+          {{dept_list[index].dept_name}}
+        </view>
+      </picker>
+    </view>
   </view>
   <view class="section">
-      <view class="section__title__short">报送日期:</view>
-      <view class='form-group'>
-        <picker mode="date" value="{{date}}" start="2018-02-01" end="{{date}}" bindchange="bindDateChange">
-            <view class="picker">
-                {{date}}
-            </view>
-        </picker>
-      </view>
+    <view class="section__title__short">报送日期:</view>
+    <view class='form-group'>
+      <picker mode="date" value="{{date}}" start="2018-02-01" end="{{date}}" bindchange="bindDateChange">
+        <view class="picker">
+          {{date}}
+        </view>
+      </picker>
+    </view>
   </view>
-  <form bindsubmit="formSubmit" bindreset="formReset">  
-      <view wx:for="{{fields_name}}" wx:key="field_name">
-        <view class="section">  
-          <view class="section__title">
-            {{item.field_name}}<text style="color:red">*</text>:
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view wx:for="{{fields_name}}" wx:key="field_name">
+      <view class="section">
+        <view class="section__title">
+          <view class="field_name_1">{{item.field_name}}</view>
+          <view wx:if="{{item.field_type=='int'}}">
+            <view class="field_name_2">({{item.field_unit}})</view>
           </view>
-        </view>
-        <view class="section">  
-          <input type="{{fields_name[index].field_type == 'string'? 'text':'digit'}}" name="{{fields_name[index].field_id}}" class='input-text' value=""/>
+          <view class="field_name_3">
+            <text style="color:red">*</text>:</view>
         </view>
       </view>
-      <view class="section btn-area">
-          <button type="primary" formType="submit" class="submit_button">提交</button>
-          <button type="warn" formType="reset" class="submit_button">清空</button>
-      </view>  
+      <view class="section">
+        <input type="{{fields_name[index].field_type == 'string'? 'text':'digit'}}" name="{{fields_name[index].field_id}}" class='input-text' value="" />
+      </view>
+    </view>
+    <view class="section btn-area">
+      <button type="primary" formType="submit" class="submit_button">提交</button>
+      <button type="warn" formType="reset" class="submit_button">清空</button>
+    </view>
   </form>
-  <!-- 黑框提示并消失 -->  
-  <toast hidden="{{toast1Hidden}}" bindchange="toast1Change">  
-      {{notice_str}}  
-  </toast>  
-  <!-- 确认框 及 提示框 -->  
-  <view class="page__bd">  
-      <modal title="确认" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">  
-          确认提交么？  
-      </modal>
-      <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">
-          <view> 清空成功 </view>
-      </modal>
-      <modal class="modal" hidden="{{modalHidden3}}" no-cancel bindconfirm="modalChange3" bindcancel="modalChange3">
-          <view> 存在空白项，请填写完整再提交！ </view>
-      </modal>
+  <!-- 黑框提示并消失 -->
+  <toast hidden="{{toast1Hidden}}" bindchange="toast1Change">
+    {{notice_str}}
+  </toast>
+  <!-- 确认框 及 提示框 -->
+  <view class="page__bd">
+    <modal title="确认" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">
+      确认提交么？
+    </modal>
+    <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">
+      <view> 清空成功 </view>
+    </modal>
+    <modal class="modal" hidden="{{modalHidden3}}" no-cancel bindconfirm="modalChange3" bindcancel="modalChange3">
+      <view> 存在空白项，请填写完整再提交！ </view>
+    </modal>
+    <modal class="modal" hidden="{{modalHidden4}}" no-cancel bindconfirm="modalChange4">
+      <view> 服务器忙碌，无法提交业绩，请联系管理员！ </view>
+    </modal>
   </view>
 </view>
