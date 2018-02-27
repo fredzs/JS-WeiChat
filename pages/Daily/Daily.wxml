@@ -29,14 +29,16 @@
     <view wx:for="{{fields_name}}" wx:key="field_name">
       <view class="section">
         <view class="section_title">
-          {{item.field_name}}
-          <text style="color:red">*</text>:
+          <view class="field_name_1">{{item.field_name}}</view>
+          <view wx:if="{{item.field_type=='int'}}">
+            <view class="field_name_2">({{item.field_unit}})</view>
+          </view>
           <view class="field_name_3">
             <text style="color:red">*</text>:</view>
         </view>
       </view>
       <view class="section">
-        <input type="{{fields_name[index].field_type == 'string'? 'text':'digit'}}" name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='next' bindconfirm="bind_next" />
+        <input type="{{fields_name[index].field_type == 'string'? 'text':'digit'}}" name="{{fields_name[index].field_id}}" class='input_text' value="1" confirm-type='done' />
       </view>
     </view>
     <view class="section btn-area">
@@ -53,11 +55,17 @@
     <modal title="确认" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">
       确认提交么？
     </modal>
+    <modal title="业绩已存在" confirm-text="覆盖" cancel-text="再检查一下" hidden="{{modalHidden5}}" mask bindconfirm="confirm_two" bindcancel="cancel_one">
+      该业绩已由{{submit_user}}于{{submit_time}}报送。请确认网点名和日期正确，重复提交将覆盖原业绩，是否继续？
+    </modal>
     <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">
       <view> 清空成功 </view>
     </modal>
     <modal class="modal" hidden="{{modalHidden3}}" no-cancel bindconfirm="modalChange3" bindcancel="modalChange3">
       <view> 存在空白项，请填写完整再提交！ </view>
+    </modal>
+    <modal class="modal" hidden="{{modalHidden4}}" no-cancel bindconfirm="modalChange4">
+      <view> 服务器忙碌，无法提交业绩，请联系管理员！ </view>
     </modal>
   </view>
 </view>

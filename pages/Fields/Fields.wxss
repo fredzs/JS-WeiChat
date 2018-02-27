@@ -10,18 +10,20 @@
 .section_title_short1 {
   float: left;
   width: 15%;
-  font-size:15px;
+  font-size: 15px;
   padding-top: 5px;
 }
 
 .section_title_short2 {
   float: left;
   width: 18%;
-  font-size:13px;
+  font-size: 13px;
+}
+
 .section_title_short3 {
   float: left;
   width: 15%;
-  font-size:15px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 5px;
 }
@@ -32,19 +34,24 @@
   height: 80%;
   padding-right: 5px;
 }
-.section__title__short5 {
+
+.section_title_short5 {
   float: left;
   width: 15%;
-  font-size:15px;
+  font-size: 15px;
 }
-.section__title__short {
+
+.section_title_short {
   float: left;
   width: 30%;
   padding-top: 5px;
 }
-.form-group {
-  float: right;
-  width: 65%;
+
+.input-text {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .section {
@@ -54,6 +61,7 @@
   padding-top: 10px;
   padding-bottom: 2px;
 }
+
 .picker {
   padding: 5px;
   border: 1px solid #ddd;

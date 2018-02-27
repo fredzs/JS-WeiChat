@@ -23,8 +23,8 @@
 </view>
 <view class="section">
   <view class="section" hidden="{{modalHidden}}">
-    <text class="field_name" space="true">报送日期 :  </text>
-    <text class="field_value">{{submit_date}}</text>
+    <text class="field_name" space="true">报送时间 :  </text>
+    <text class="field_value">{{submit_time}}</text>
   </view>
 </view>
 <view wx:for="{{extra_fields}}" wx:key="field_name2">

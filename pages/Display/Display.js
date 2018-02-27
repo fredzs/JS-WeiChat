@@ -27,7 +27,7 @@ Page({
     length_1: 0,
     dept: 1,
     submit_user: "",
-    submit_date: "",
+    submit_time: "",
     extra_fields: [],
     modalHidden: false
   },
@@ -79,7 +79,7 @@ Page({
               that.setData({
                 modalHidden: false,
                 submit_user: res.data.submit_user,
-                submit_date: res.data.submit_date,
+                submit_time: res.data.submit_time,
                 extra_fields: res.data.extra_fields,
               })
             },
@@ -134,7 +134,7 @@ Page({
               that.setData({
                 modalHidden: false,
                 submit_user: res.data.submit_user,
-                submit_date: res.data.submit_date,
+                submit_time: res.data.submit_time,
                 extra_fields: res.data.extra_fields,
               })
             },

@@ -49,5 +49,7 @@ App({
   globalData: {
     userInfo: null,
     today_str: date_str(today),
+    request_url: 'https://fredirox.com/api/find',
+    test_url: 'https://127.0.0.1:5000/api/find',
   }
 })

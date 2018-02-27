@@ -1,10 +1,12 @@
 var app = getApp();
+//var focus_list=[]
 Page({
   data: {
     // text:"这是一个页面"  
     nick_name: "",
     dept_list: {},
     fields_name: {},
+    //focus_list: [],
     dept_id: 1,
     date: "",
     submit_user: "",
@@ -14,6 +16,7 @@ Page({
     modalHidden2: true,
     modalHidden3: true,
     modalHidden4: true,
+    modalHidden5: true,
     notice_str: '',
     index: 0
   },
@@ -47,7 +50,40 @@ Page({
       modalHidden3: false
     })
   },
-  confirm_one: function () {
+  confirm_one: function (){
+    var that = this;
+    wx.request({
+      url: 'https://fredirox.com/api/find',
+      data: {
+        "dept_id": that.data.dept_id,
+        "date": that.data.date,
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        console.log(res.data)
+        var submit_user = res.data.submit_user
+        var submit_time = res.data.submit_time
+        that.setData({
+          submit_user: submit_user,
+          submit_time: submit_time,
+        })
+        if (submit_user != ""){
+          that.setData({
+            modalHidden: true,
+            modalHidden5: false,
+          })
+        } else{
+          that.submit()
+        }
+      },
+    })
+  },
+  confirm_two: function () {
+    this.submit()
+  },
+  submit: function () {
     var that = this;
     wx.request({
       url: 'https://fredirox.com/api/submit',
@@ -65,6 +101,7 @@ Page({
         console.log(res.data)
         that.setData({
           modalHidden: true,
+          modalHidden5: true,
           toast1Hidden: false,
         })
         if (res.data == "success") {
@@ -83,6 +120,7 @@ Page({
     console.log(e);
     this.setData({
       modalHidden: true,
+      modalHidden5: true,
       toast1Hidden: false,
       notice_str: '取消成功'
     });
@@ -123,13 +161,14 @@ Page({
       date: e.detail.value
     })
   },
-  hi: function () {
-
-  },
+  // bind_next: function (e) {
+  //   console.log('输入完毕，跳到下一个input', e.detail)
+  //   focus_list[e]
+  // },
   onLoad: function (options) {
     this.setData({
       nick_name: app.globalData.userInfo.nickName,
-      date : app.globalData.today_str
+      date: app.globalData.today_str
     })
     var that = this
     //获取网点列表  
@@ -141,11 +180,11 @@ Page({
       success: function (res) {
         console.log("/api/branches返回值：")
         console.log(res.data)
-        if (res.statusCode == 502){
+        if (res.statusCode == 502) {
           that.setData({
             modalHidden4: false
           })
-        }else {
+        } else {
           that.setData({
             dept_list: res.data,
             index: 0, //res.data[0].dept_id
@@ -156,6 +195,7 @@ Page({
         console.log(err)
       }
     })
+    //获取字段名列表
     wx.request({
       url: "https://fredirox.com/api/fields_name",
       header: {
@@ -168,10 +208,18 @@ Page({
           that.setData({
             modalHidden4: false
           })
-        }else{
+        } else {
           that.setData({
             fields_name: res.data,
           })
+          // var field_amount = res.data.length
+          // for (var i = 0; i < field_amount; i++) {
+          //   focus_list.push(false)
+          // }
+          // that.setData({
+          //   focus_list: focus_list,
+          // })
+          // console.log(that.data.focus_list)
         }
       },
       fail: function (err) {
