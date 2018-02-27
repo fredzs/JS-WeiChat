@@ -1,4 +1,5 @@
 /* pages/index/Manage.wxss */
+
 .button {
   margin-top: 30px;
 }

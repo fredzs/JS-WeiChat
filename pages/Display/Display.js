@@ -1,22 +1,11 @@
 // pages/Display/Display.js
+var app = getApp();
 const date = new Date()
 const years = []
 const months = []
 const days = []
 const depts = []
-function date_str() {
-  var date = new Date()
-  var yy = date.getFullYear()
-  var mm = date.getMonth() + 1
-  var dd = date.getDate()
-  if (mm < 10) {
-    mm = '0' + mm
-  }
-  if (dd < 10) {
-    dd = '0' + dd
-  }
-  return yy + '-' + mm + '-' + dd
-};
+
 for (let i = 2018; i <= date.getFullYear(); i++) {
   years.push(i)
 }
@@ -27,11 +16,7 @@ for (let i = 1; i <= 31; i++) {
   days.push(i)
 }
 Page({
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    // text:"这是一个页面"  
+  data: { 
     years: years,
     year: date.getFullYear(),
     months: months,
@@ -113,9 +98,7 @@ Page({
       value: [this.data.year, this.data.month - 1, this.data.day - 1, this.data.dept - 1]
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
   onLoad: function (options) {
     var that = this
     wx.request({
@@ -142,7 +125,7 @@ Page({
               "Content-Type": "application/json"
             },
             data: {
-              "date": date_str(),
+              "date": app.globalData.today_str,
               "dept_name": that.data.depts[that.data.dept - 1].dept_name
             },
             success: function (res) {
@@ -167,53 +150,4 @@ Page({
       value: [date.getFullYear(), date.getMonth(), date.getDate() - 1, this.data.dept - 1]
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

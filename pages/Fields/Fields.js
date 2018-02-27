@@ -1,21 +1,13 @@
 // pages/Fields/Fields.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    fields:[],
-    type_list:["string","int","bool"],
-    type_index: {"string":0,"int":1, "bool":2},
+    fields: [],
+    type_list: ["string", "int", "bool"],
+    type_index: { "string": 0, "int": 1, "bool": 2 },
     status_list: [false, true],
-    status_index: {false:0, true:1},
+    status_index: { false: 0, true: 1 },
     index: 1,
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     var that = this
     wx.request({
@@ -33,7 +25,6 @@ Page({
       },
     })
   },
-
   bindPickerChange: function (e) {
     var that = this
     console.log('picker发送选择改变，携带值为', this.data.type_list[e.detail.value])
@@ -49,7 +40,6 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (res) {
-        //console.log(that.data.fields)
       }
     })
     var v = that.data.fields
@@ -82,52 +72,4 @@ Page({
       fields: v
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

@@ -1,9 +1,9 @@
 <!--pages/Email/Email.wxml-->
 <view class="container">
   <picker mode="date" value="{{date}}" start="2018-02-01" end="{{date}}" bindchange="bindDateChange">
-      <view class="picker">
-          {{date}}
-      </view>
+    <view class="picker">
+      {{date}}
+    </view>
   </picker>
   <view class="button">
     <button type="primary" bindtap="Day">发送单日业绩统计</button>
@@ -11,18 +11,17 @@
   <view class="date">
     <view class="left">
       <picker mode="date" value="{{date_begin}}" start="2018-02-01" end="{{date}}" bindchange="bindDateBeginChange">
-      <text>起始日期：</text>
+        <text>起始日期：</text>
         <view class="picker">
-            {{date_begin}}
+          {{date_begin}}
         </view>
       </picker>
     </view>
     <view class="right">
-      
       <picker mode="date" value="{{date_end}}" start="2018-02-01" end="{{date}}" bindchange="bindDateEndChange">
         <text>终止日期：</text>
         <view class="picker">
-            {{date_end}}
+          {{date_end}}
         </view>
       </picker>
     </view>
@@ -35,7 +34,7 @@
   </view>
 </view>
 
-<!-- 黑框提示并消失 -->  
-<toast hidden="{{toastHidden}}" bindchange="toastChange">  
-    {{notice_str}}  
-</toast> 
+<!-- 黑框提示并消失 -->
+<toast hidden="{{toastHidden}}" bindchange="toastChange">
+  {{notice_str}}
+</toast>

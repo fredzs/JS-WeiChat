@@ -1,42 +1,45 @@
-#daily{  
-    background: #f5f5f5;  
-}  
-.section__title{
-    float: left;  
-    width:100%;  
-    padding-top: 5px;  
-    padding-bottom: 5px;
-}  
-.section__title__short{
-    float: left;  
-    width:35%;  
-    padding-top: 5px;  
-    padding-bottom: 5px;
-}  
-.form-group{  
-    float: right;  
-    width:65%;  
-}  
-.section{  
-    clear: both;  
-    width:90%;  
-    margin: auto;  
-}  
-.input-text{  
-    border: 1px solid #ddd;  
-    background-color: #FFFFFF;  
-    padding-top: 5px;  
-    padding-bottom: 5px;
-}  
-.button{  
-    border: 1px solid #1aad19;  
-    border-radius: 2px;  
-}  
-.picker{  
-    padding: 5px;  
-    border: 1px solid #ddd;  
-    background-color: #FFFFFF;  
-}  
+#daily {
+  background: #f5f5f5;
+}
+
+.section_title {
+  float: left;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.section_title_short {
+  float: left;
+  width: 35%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.form_group {
+  float: right;
+  width: 65%;
+}
+
+.section {
+  clear: both;
+  width: 90%;
+  margin: auto;
+}
+
+.input_text {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.picker {
+  padding: 5px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
 .submit_button {
   margin-top: 10px;
 }

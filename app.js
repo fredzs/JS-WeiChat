@@ -1,4 +1,17 @@
 //app.js
+var today = new Date();
+function date_str(date) {
+  var yy = date.getFullYear()
+  var mm = date.getMonth() + 1
+  var dd = date.getDate()
+  if (mm < 10) {
+    mm = '0' + mm
+  }
+  if (dd < 10) {
+    dd = '0' + dd
+  }
+  return yy + '-' + mm + '-' + dd
+};
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -34,6 +47,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    today_str: date_str(today),
   }
 })

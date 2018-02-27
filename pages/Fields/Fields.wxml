@@ -4,23 +4,23 @@
     <text>{{item.field_name}}:</text>
   </view>
   <view class="section">
-    <view class="section__title__short1">类型：</view>
-    <view class='section__title__short2'>
+    <view class="section_title_short1">类型：</view>
+    <view class='section_title_short2'>
       <picker bindchange="bindPickerChange" value="{{type_index[fields[index].field_type]}}" data-index="{{index}}" data-id="{{fields[index].field_id}}" range="{{type_list}}">
         <view class="picker">
           {{fields[index].field_type}}
         </view>
       </picker>
     </view>
-    <view class="section__title__short3">可用：</view>
+    <view class="section_title_short3">可用：</view>
     <view wx:if="{{item.status==true}}">
-      <view class="section__title__short4">
-        <switch checked bindchange="bindSwitchChange" value="{{fields[index].status}}" data-index="{{index}}" data-id="{{fields[index].field_id}}"/>
+      <view class="section_title_short4">
+        <switch checked bindchange="bindSwitchChange" value="{{fields[index].status}}" data-index="{{index}}" data-id="{{fields[index].field_id}}" />
       </view>
     </view>
     <view wx:else>
-      <view class="section__title__short4">
-        <switch bindchange="bindSwitchChange" value="{{fields[index].status}}" data-index="{{index}}" data-id="{{fields[index].field_id}}"/>
+      <view class="section_title_short4">
+        <switch bindchange="bindSwitchChange" value="{{fields[index].status}}" data-index="{{index}}" data-id="{{fields[index].field_id}}" />
       </view>
     </view>
   </view>

@@ -1,105 +1,45 @@
 /* pages/Fields/Fields.wxss */
 
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-}
-
-.box {
-  width: 300px;
-  position: relative;
-}
-
-.main {
-  width: 90%;
-  height: 50px;
-  background: #eee;
-  border: 1px solid #ccc;
-  margin: 2px auto;
-  text-align: center;
-  line-height: 50px;
-}
-
-.mainmove {
-  position: absolute;
-  opacity: 0.7;
-}
-
-.maind {
-  background: #fff;
-  border: 1px dashed #efefef;
-}
-
-.mainend {
-  position: static;
-  opacity: 1;
-}
-
-.section__title {
+.section_title {
   float: left;
   width: 100%;
   padding-top: 5px;
   padding-bottom: 5px;
 }
 
-.section__title__short1 {
+.section_title_short1 {
   float: left;
   width: 15%;
-  font-size:16px;
+  font-size: 16px;
   padding-top: 5px;
 }
 
-.section__title__short2 {
+.section_title_short2 {
   float: left;
   width: 20%;
-  font-size:16px;
-
+  font-size: 16px;
 }
-.section__title__short3 {
+
+.section_title_short3 {
   float: left;
   width: 15%;
-  font-size:16px;
+  font-size: 16px;
   padding-left: 20px;
   padding-top: 5px;
 }
-.section__title__short4 {
+
+.section_title_short4 {
   float: left;
   width: 20%;
   height: 80%;
-}
-.section__title__short {
-  float: left;
-  width: 30%;
-  padding-top: 5px;
-}
-.form-group {
-  float: right;
-  width: 65%;
 }
 
 .section {
   clear: both;
   width: 90%;
-  position:relative;
+  position: relative;
   padding-top: 10px;
   padding-bottom: 2px;
-}
-
-.input-text {
-  border: 1px solid #ddd;
-  background-color: #fff;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.button {
-  border: 1px solid #1aad19;
-  border-radius: 2px;
 }
 
 .picker {

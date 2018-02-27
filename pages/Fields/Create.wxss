@@ -1,35 +1,41 @@
 /* pages/Fields/Create.wxss */
-.section{  
-    clear: both;  
-    width:90%;  
-    margin: 5px;  
+
+.section {
+  clear: both;
+  width: 90%;
+  margin: 5px;
 }
-.input-text{  
-    border: 1px solid #ddd;  
-    background-color: #FFFFFF;  
-    padding-top: 5px;  
-    padding-bottom: 5px;
+
+.input-text {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
+
 .submit_button {
   margin-top: 10px;
   margin-left: 60px;
-  float: left;  
-  width:30%;  
+  float: left;
+  width: 30%;
 }
+
 .cancle_button {
   margin-top: 10px;
   margin-right: 60px;
-  float: right;  
-  width:30%;  
+  float: right;
+  width: 30%;
 }
-.section_title_short{
-    float: left;  
-    width:35%;  
-    padding-top: 5px;  
-    padding-bottom: 5px;
-}  
-.picker{  
-    padding: 5px;  
-    border: 1px solid #ddd;  
-    background-color: #FFFFFF;  
-}  
+
+.section_title_short {
+  float: left;
+  width: 35%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.picker {
+  padding: 5px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}

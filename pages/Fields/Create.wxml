@@ -10,7 +10,7 @@
     <view class="section_title_short">字段类型 :</view>
     <picker-view indicator-style="height: 30px;" style="width: 60%; height: 40px;" value="{{value}}" bindchange="bind_type_change">
       <picker-view-column>
-        <view wx:for="{{type_list}}" class="picker-view-column"  wx:key="d">{{item}}</view>
+        <view wx:for="{{type_list}}" class="picker-view-column" wx:key="d">{{item}}</view>
       </picker-view-column>
     </picker-view>
   </view>
@@ -21,7 +21,6 @@
     </view>
   </view>
 </form>
-
 <!-- 黑框提示并消失 -->
 <toast hidden="{{toast1Hidden}}" bindchange="toast1Change">
   {{notice_str}}

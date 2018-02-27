@@ -1,26 +1,12 @@
 var app = getApp();
-var today = new Date();
-function date_str(date){
-  var yy = date.getFullYear()
-  var mm = date.getMonth() + 1
-  var dd = date.getDate()
-  if (mm <10) {
-    mm = '0' + mm
-  }
-  if (dd < 10) {
-    dd = '0' + dd
-  }
-  return yy+'-'+mm+'-'+dd
-};
-
 Page({
   data: {
     // text:"这是一个页面"  
     nick_name: "",
     dept_list: {},
-    fields_name:{},
+    fields_name: {},
     dept_id: 1,
-    date: date_str(today),
+    date: "",
     submit_user: "",
     extra_fields: {},
     toast1Hidden: true,
@@ -30,22 +16,18 @@ Page({
     notice_str: '',
     index: 0
   },
-  check_input: function(){
+  check_input: function () {
     var f = this.data.extra_fields
     var l = this.data.fields_name
-    // if (this.data.submit_user == "") {
-    //   console.log("报送人姓名为空：" + this.data.submit_user)
-    //   return false
-    // }
-    for (var field in l){
-      if(f[l[field].field_id]==""){
+    for (var field in l) {
+      if (f[l[field].field_id] == "") {
         return false
       }
     }
     return true
   },
   submint_user_input: function (e) {
-    console.log("报送人姓名改变："+e.detail.value)
+    console.log("报送人姓名改变：" + e.detail.value)
     this.setData({
       submit_user: e.detail.value
     })
@@ -129,14 +111,15 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      nick_name: app.globalData.userInfo.nickName
+      nick_name: app.globalData.userInfo.nickName,
+      date : app.globalData.today_str
     })
     var that = this
     //获取网点列表  
     wx.request({
       url: "https://fredirox.com/api/branches",
       header: {
-        "Content-Type":"application/json"
+        "Content-Type": "application/json"
       },
       success: function (res) {
         that.setData({
@@ -169,28 +152,16 @@ Page({
     })
     // 页面初始化 options为页面跳转所带来的参数  
   },
-  onReady: function () {
-    // 页面渲染完成  
-  },
-  onShow: function () {
-    // 页面显示  
-  },
-  onHide: function () {
-    // 页面隐藏  
-  },
-  onUnload: function () {
-    // 页面关闭  
-  },
   formSubmit: function (e) {
     console.log('form发生了submit事件');
     this.setData({
       extra_fields: e.detail.value
     })
     var check = this.check_input();
-    if (check){
+    if (check) {
       this.modalTap();
     }
-    else{
+    else {
       this.modalTap3();
     }
   },

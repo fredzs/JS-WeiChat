@@ -18,16 +18,11 @@ Page({
     current_index = e.target.dataset.index;
     start_point = { x: e.touches[0].clientX, y: e.touches[0].clientY }
     box_offset = { x: e.currentTarget.offsetLeft, y: e.currentTarget.offsetTop }
-    //console.log(current_index, start_point, box_offset)
   },
   //触摸点移动
   move: function (e) {
     //console.log(e.target)
-    //yy = e.currentTarget.offsetTop;
     end_point = { x: e.touches[0].clientX - start_point.x + box_offset.x, y: e.touches[0].clientY - start_point.y + box_offset.y }
-    // x2 = e.touches[0].clientX - x + x1;
-    // y2 = e.touches[0].clientY - y + y1;
-    // console.log("current_index" + current_index)
     this.setData({
       mainx: current_index,
       opacity: 0.7,
@@ -67,11 +62,10 @@ Page({
       new_order = [];
       for (var m = 0; m < this.data.fields.length; m++) {
         var item = {}
-        item = { "id": old_order[m].id,"new_order": m+1}
+        item = { "id": old_order[m].id, "new_order": m + 1 }
         new_order.push(item);
         old_order[m].id = m + 1;
       }
-      // console.log("old_order", old_order);
       console.log("new_order", new_order);
 
       wx.request({
@@ -84,7 +78,6 @@ Page({
           'Content-Type': 'application/json'
         },
         success: function (res) {
-          //console.log(that.data.fields)
         }
       })
       this.setData({

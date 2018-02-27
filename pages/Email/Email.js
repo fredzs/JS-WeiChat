@@ -1,26 +1,11 @@
 // pages/Email/Email.js
-var today = new Date();
-function date_str(date) {
-  var yy = date.getFullYear()
-  var mm = date.getMonth() + 1
-  var dd = date.getDate()
-  if (mm < 10) {
-    mm = '0' + mm
-  }
-  if (dd < 10) {
-    dd = '0' + dd
-  }
-  return yy + '-' + mm + '-' + dd
-};
+var app = getApp();
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-    date: date_str(today),
+    date: app.globalData.today_str,
     date_begin: "2018-02-01",
-    date_end: date_str(today),
+    date_end: app.globalData.today_str,
     toastHidden: true,
     notice_str: '',
   },
@@ -28,60 +13,9 @@ Page({
   toastChange: function (e) {
     this.setData({ toastHidden: true });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
   onLoad: function (options) {
-  
-  },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   },
   Day: function () {
     var that = this;
