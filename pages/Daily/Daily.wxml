@@ -31,6 +31,8 @@
         <view class="section_title">
           {{item.field_name}}
           <text style="color:red">*</text>:
+          <view class="field_name_3">
+            <text style="color:red">*</text>:</view>
         </view>
       </view>
       <view class="section">

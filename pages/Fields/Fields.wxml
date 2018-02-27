@@ -23,5 +23,9 @@
         <switch bindchange="bindSwitchChange" value="{{fields[index].status}}" data-index="{{index}}" data-id="{{fields[index].field_id}}" />
       </view>
     </view>
+    <view class="section__title__short1">单位：</view>
+    <view class='section__title__short5'>
+      <input name="field_unit" value='{{fields[index].field_unit}}' class='input-text' bindblur="bind_unit_change" data-index="{{index}}" data-id="{{fields[index].field_id}}" />
+    </view>
   </view>
 </view>

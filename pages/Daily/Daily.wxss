@@ -43,3 +43,18 @@
 .submit_button {
   margin-top: 10px;
 }
+
+.field_name_1 {
+  float: left;
+  font-size: 16px;
+}
+
+.field_name_2 {
+  float: left;
+  font-size: 16px;
+}
+
+.field_name_3 {
+  float: left;
+  font-size: 16px;
+}

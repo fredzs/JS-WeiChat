@@ -5,17 +5,26 @@ Page({
     modalHidden: true,
     modalHidden2: true,
     modalHidden3: true,
+    modalHidden4: true,
+    modalHidden5: true,
     notice_str: '',
-    type_list: ["string", "int", "bool"],
-    type_index: { "string": 0, "int": 1, "bool": 2 },
+    type_list: ["请选择", "int", "string", "bool"],
+    type_index: { "请选择": 0, "int": 1, "string":2, "bool": 3 },
     field_name: "",
     field_type: 0,
+    field_unit: ""
   },
   check_input: function () {
     if (this.data.field_name == "") {
-      return false
+      return 1
     }
-    return true
+    if (this.data.field_type == 0) {
+      return 2
+    }
+    if (this.data.field_unit == "") {
+      return 3
+    }
+    return 0
   },
   toast1Change: function (e) {
     this.setData({ toast1Hidden: true });
@@ -31,14 +40,26 @@ Page({
       modalHidden3: false
     })
   },
+  modalTap4: function (e) {
+    this.setData({
+      modalHidden4: false
+    })
+  },
+  modalTap5: function (e) {
+    this.setData({
+      modalHidden5: false
+    })
+  },
   confirm_one: function () {
     var that = this;
+    console.log(this.data)
     wx.request({
       url: 'https://fredirox.com/api/create_field',
       method: 'POST',
       data: {
         "field_name": that.data.field_name,
-        "field_type": that.data.field_type[0]
+        "field_type": that.data.field_type[0],
+        "field_unit": that.data.field_unit
       },
       header: {
         'Content-Type': 'application/json'
@@ -48,8 +69,16 @@ Page({
         that.setData({
           modalHidden: true,
           toast1Hidden: false,
-          notice_str: '提交成功'
-        });
+        })
+        if (res.data=="success"){
+          that.setData({
+            notice_str: '提交成功'
+          });
+        } else{
+          that.setData({
+            notice_str: '提交失败：' + res.data
+          });
+        }
       }
     })
   },
@@ -60,10 +89,16 @@ Page({
       toast1Hidden: false,
       notice_str: '取消成功'
     });
-  },
+  }, 
   bind_name_change: function (e) {
     var that = this
     console.log('field_name发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      field_name: e.detail.value,
+    })
+  },
+  bind_name_input: function (e) {
+    var that = this
     this.setData({
       field_name: e.detail.value,
     })
@@ -73,6 +108,19 @@ Page({
     const val = e.detail.value
     this.setData({
       field_type: e.detail.value,
+    })
+  },
+  bind_unit_change: function (e) {
+    var that = this
+    console.log('field_unit发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      field_unit: e.detail.value,
+    })
+  },
+  bind_unit_input: function (e) {
+    var that = this
+    this.setData({
+      field_unit: e.detail.value,
     })
   },
   //弹出提示框  
@@ -91,14 +139,27 @@ Page({
       modalHidden3: true
     })
   },
+  modalChange4: function (e) {
+    this.setData({
+      modalHidden4: true
+    })
+  },
+  modalChange5: function (e) {
+    this.setData({
+      modalHidden5: true
+    })
+  },
   formSubmit: function (e) {
     console.log('form发生了submit事件');
     var check = this.check_input();
-    if (check) {
-      this.modalTap();
-    }
-    else {
+    if (check == 1){
       this.modalTap3();
+    } else if (check == 2){
+      this.modalTap4();
+    } else if (check == 3) {
+      this.modalTap5();
+    }else if (check == 0){
+      this.modalTap();
     }
   },
   formReset: function () {

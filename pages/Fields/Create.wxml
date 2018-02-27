@@ -3,7 +3,7 @@
   <view class="section">
     <view class="section_title_short">字段名称 :</view>
     <view class='form-group'>
-      <input name="field_name" value='' class='input-text' bindblur="bind_name_change" />
+      <input name="field_name" value='' class='input-text' bindblur="bind_name_change" bindinput='bind_name_input'/>
     </view>
   </view>
   <view class="section">
@@ -13,6 +13,12 @@
         <view wx:for="{{type_list}}" class="picker-view-column" wx:key="d">{{item}}</view>
       </picker-view-column>
     </picker-view>
+  </view>
+  <view class="section">
+    <view class="section_title_short">字段单位 :</view>
+    <view class='form-group'>
+      <input name="field_unit" value='' class='input-text' bindblur="bind_unit_change" bindinput='bind_unit_input'/>
+    </view>
   </view>
   <view class="section">
     <view class="">
@@ -34,6 +40,12 @@
     <view> 清空成功 </view>
   </modal>
   <modal class="modal" hidden="{{modalHidden3}}" no-cancel bindconfirm="modalChange3" bindcancel="modalChange3">
-    <view> 存在空白项，请填写完整再提交！ </view>
+    <view> 请填写字段名称 </view>
+  </modal>
+  <modal class="modal" hidden="{{modalHidden4}}" no-cancel bindconfirm="modalChange4" bindcancel="modalChange4">
+    <view> 请上下滑动，选择字段类型 </view>
+  </modal>
+  <modal class="modal" hidden="{{modalHidden5}}" no-cancel bindconfirm="modalChange5" bindcancel="modalChange5">
+    <view> 请填写字段单位 </view>
   </modal>
 </view>
