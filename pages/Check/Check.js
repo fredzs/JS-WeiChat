@@ -3,6 +3,7 @@ const date = new Date()
 const years = []
 const months = []
 const days = []
+var app = getApp();
 
 for (let i = 2018; i <= date.getFullYear(); i++) {
   years.push(i)
@@ -43,7 +44,8 @@ Page({
         "Content-Type": "application/json"
       },
       data: {
-        "date": this.data.year + "-" + this.data.month + "-" + this.data.day
+        "date": this.data.year + "-" + this.data.month + "-" + this.data.day,
+        "user_name": app.globalData.userInfo.nickName
       },
       success: function (res) {
         console.log("/api/check返回值：")
@@ -71,6 +73,9 @@ Page({
       url: "https://fredirox.com/api/check",
       header: {
         "Content-Type": "application/json"
+      },
+      data:{
+        "user_name": app.globalData.userInfo.nickName
       },
       success: function (res) {
         console.log("/api/check返回值：")

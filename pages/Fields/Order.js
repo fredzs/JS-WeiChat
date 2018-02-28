@@ -72,7 +72,8 @@ Page({
         url: 'https://fredirox.com/api/sort_field',
         method: 'POST',
         data: {
-          "new_order": new_order
+          "new_order": new_order,
+          "user_name": app.globalData.userInfo.nickName
         },
         header: {
           'Content-Type': 'application/json'
@@ -93,6 +94,9 @@ Page({
       url: "https://fredirox.com/api/fields",
       header: {
         "Content-Type": "application/json"
+      },
+      data:{
+        "user_name": app.globalData.userInfo.nickName
       },
       success: function (res) {
         console.log("/api/fields返回值：")

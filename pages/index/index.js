@@ -46,6 +46,27 @@ Page({
         }
       })
     }
+    var that = this
+    wx.authorize({
+      scope: 'scope.userInfo',
+      success(res) {
+        console.log('获取头像、昵称授权成功')
+        wx.getUserInfo({  //获得个人信息
+          success: function (res) {
+            console.log(res.userInfo)
+            app.globalData.userInfo = res.userInfo
+            that.setData({
+              userInfo: res.userInfo,
+              hasUserInfo: true
+            })
+          },
+          fail: function (res) { },
+          complete: function (res) { },
+        })
+      },
+      fail() {
+      }
+    })
   },
   getUserInfo: function (e) {
     console.log(e)
@@ -87,6 +108,7 @@ Page({
       url: 'https://fredirox.com/api/admin',
       data: {
         "admin_password": that.data.admin_password,
+        "user_name": app.globalData.userInfo.nickName
       },
       header: {
         'Content-Type': 'application/json'

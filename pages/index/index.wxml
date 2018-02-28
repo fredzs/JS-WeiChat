@@ -1,14 +1,14 @@
 <!--index.wxml-->
 <view class="container">
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 申请权限:获取昵称和头像 </button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
   <view class="button">
-    <button type="primary" bindtap="Daily">报送当日业绩</button>
+    <button type="primary" bindtap="Daily">报送对公营销业绩</button>
   </view>
   <view class="button">
     <button type="primary" bindtap="Manage">管理员页面</button>

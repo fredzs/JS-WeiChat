@@ -17,6 +17,7 @@ Page({
     modalHidden3: true,
     modalHidden4: true,
     modalHidden5: true,
+    modalHidden6: true,
     notice_str: '',
     index: 0
   },
@@ -57,6 +58,7 @@ Page({
       data: {
         "dept_id": that.data.dept_id,
         "date": that.data.date,
+        "user_name": app.globalData.userInfo.nickName
       },
       header: {
         "Content-Type": "application/json"
@@ -92,7 +94,8 @@ Page({
         "dept_id": that.data.dept_id,
         "date": that.data.date,
         "submit_user": that.data.nick_name,//that.data.submit_user,
-        "extra_fields": that.data.extra_fields
+        "extra_fields": that.data.extra_fields,
+        "user_name": app.globalData.userInfo.nickName
       },
       header: {
         'Content-Type': 'application/json'
@@ -166,67 +169,81 @@ Page({
   //   focus_list[e]
   // },
   onLoad: function (options) {
-    this.setData({
-      nick_name: app.globalData.userInfo.nickName,
-      date: app.globalData.today_str
-    })
-    var that = this
-    //获取网点列表  
-    wx.request({
-      url: "https://fredirox.com/api/branches",
-      header: {
-        "Content-Type": "application/json"
-      },
-      success: function (res) {
-        console.log("/api/branches返回值：")
-        console.log(res.data)
-        if (res.statusCode == 502) {
-          that.setData({
-            modalHidden4: false
-          })
-        } else {
-          that.setData({
-            dept_list: res.data,
-            index: 0, //res.data[0].dept_id
-          })
+    if (app.globalData.userInfo != null){
+      this.setData({
+        nick_name: app.globalData.userInfo.nickName,
+        date: app.globalData.today_str
+      })
+      var that = this
+      //获取网点列表  
+      wx.request({
+        url: "https://fredirox.com/api/branches",
+        header: {
+          "Content-Type": "application/json"
+        },
+        data:{
+          "user_name": app.globalData.userInfo.nickName
+        },
+        success: function (res) {
+          console.log("/api/branches返回值：")
+          console.log(res.data)
+          if (res.statusCode == 502) {
+            that.setData({
+              modalHidden4: false
+            })
+          } else {
+            that.setData({
+              dept_list: res.data,
+              index: 0, //res.data[0].dept_id
+            })
+          }
+        },
+        fail: function (err) {
+          console.log(err)
         }
-      },
-      fail: function (err) {
-        console.log(err)
-      }
-    })
-    //获取字段名列表
-    wx.request({
-      url: "https://fredirox.com/api/fields_name",
-      header: {
-        "Content-Type": "application/json"
-      },
-      success: function (res) {
-        console.log("/api/fields_name返回值：")
-        console.log(res.data)
-        if (res.statusCode == 502) {
-          that.setData({
-            modalHidden4: false
-          })
-        } else {
-          that.setData({
-            fields_name: res.data,
-          })
-          // var field_amount = res.data.length
-          // for (var i = 0; i < field_amount; i++) {
-          //   focus_list.push(false)
-          // }
-          // that.setData({
-          //   focus_list: focus_list,
-          // })
-          // console.log(that.data.focus_list)
+      })
+      //获取字段名列表
+      wx.request({
+        url: "https://fredirox.com/api/fields_name",
+        header: {
+          "Content-Type": "application/json"
+        },
+        data:{
+          "user_name": app.globalData.userInfo.nickName
+        },
+        success: function (res) {
+          console.log("/api/fields_name返回值：")
+          console.log(res.data)
+          if (res.statusCode == 502) {
+            that.setData({
+              modalHidden4: false
+            })
+          } else {
+            that.setData({
+              fields_name: res.data,
+            })
+            // var field_amount = res.data.length
+            // for (var i = 0; i < field_amount; i++) {
+            //   focus_list.push(false)
+            // }
+            // that.setData({
+            //   focus_list: focus_list,
+            // })
+            // console.log(that.data.focus_list)
+          }
+        },
+        fail: function (err) {
+          console.log(err)
         }
-      },
-      fail: function (err) {
-        console.log(err)
-      }
-    })
+      })
     // 页面初始化 options为页面跳转所带来的参数  
+    } else {
+      console.log('无获取昵称权限');
+      this.setData({
+        modalHidden6: false
+      })
+    }
+    
   },
   formSubmit: function (e) {
     console.log('form发生了submit事件');

@@ -38,7 +38,7 @@
         </view>
       </view>
       <view class="section">
-        <input type="{{fields_name[index].field_type == 'string'? 'text':'digit'}}" name="{{fields_name[index].field_id}}" class='input_text' value="1" confirm-type='done' />
+        <input type="{{fields_name[index].field_type == 'string'? 'text':'digit'}}" name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' />
       </view>
     </view>
     <view class="section btn-area">
@@ -66,6 +66,9 @@
     </modal>
     <modal class="modal" hidden="{{modalHidden4}}" no-cancel bindconfirm="modalChange4">
       <view> 服务器忙碌，无法提交业绩，请联系管理员！ </view>
+    </modal>
+    <modal class="modal" hidden="{{modalHidden6}}" no-cancel bindconfirm="modalChange4">
+      <view> 无法读取报送人姓名，请返回上一页面，申请权限！ </view>
     </modal>
   </view>
 </view>

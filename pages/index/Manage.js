@@ -1,4 +1,5 @@
 // pages/index/Manage.js
+var app = getApp();
 Page({
   data: {
   },

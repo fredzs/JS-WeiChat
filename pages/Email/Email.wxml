@@ -6,7 +6,7 @@
     </view>
   </picker>
   <view class="button">
-    <button type="primary" bindtap="Day">发送单日业绩统计</button>
+    <button type="primary" bindtap="Day">立即发送当日统计邮件</button>
   </view>
   <view class="date">
     <view class="left">
@@ -27,7 +27,7 @@
     </view>
   </view>
   <view class="button">
-    <button type="primary" bindtap="Range">发送期间业绩统计</button>
+    <button type="primary" bindtap="Range">立即发送期间统计邮件</button>
   </view>
   <view class="button">
     <button type="primary" bindtap="">统计（开发中）</button>

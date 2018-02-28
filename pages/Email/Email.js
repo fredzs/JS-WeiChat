@@ -23,7 +23,8 @@ Page({
       url: 'https://fredirox.com/api/send_daily_email',
       method: 'POST',
       data: {
-        "date": that.data.date
+        "date": that.data.date,
+        "user_name": app.globalData.userInfo.nickName
       },
       header: {
         'Content-Type': 'application/json'

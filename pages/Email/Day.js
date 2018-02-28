@@ -1,4 +1,5 @@
 // pages/Email/Day.js
+var app = getApp();
 Page({
 
   data: {

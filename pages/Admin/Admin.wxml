@@ -6,7 +6,7 @@
   <button class="button_1" type="primary" bindtap="fields_config">字段配置</button>
 </view>
 <view>
-  <button class="button_1" type="primary" bindtap="fields_order">字段排序</button>
+  <button class="button_1" type="primary" bindtap="fields_order">字段排序(慎用)</button>
 </view>
 <text class="subtitle">网点维护</text>
 <view>

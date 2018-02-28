@@ -1,4 +1,5 @@
 // pages/Fields/Fields.js
+var app = getApp();
 Page({
   data: {
     fields: [],
@@ -14,6 +15,9 @@ Page({
       url: "https://fredirox.com/api/fields",
       header: {
         "Content-Type": "application/json"
+      },
+      data:{
+        "user_name": app.globalData.userInfo.nickName
       },
       success: function (res) {
         console.log("/api/fields返回值：")
@@ -35,6 +39,7 @@ Page({
         "field_id": e.currentTarget.dataset.id,
         "update_k": "field_unit",
         "update_v": e.detail.value,
+        "user_name": app.globalData.userInfo.nickName
       },
       header: {
         'Content-Type': 'application/json'
@@ -58,6 +63,7 @@ Page({
         "field_id": e.currentTarget.dataset.id,
         "update_k": "field_type",
         "update_v": that.data.type_list[e.detail.value],
+        "user_name": app.globalData.userInfo.nickName
       },
       header: {
         'Content-Type': 'application/json'
@@ -86,6 +92,7 @@ Page({
         "field_id": e.currentTarget.dataset.id,
         "update_k": "status",
         "update_v": that.data.status_index[e.detail.value],
+        "user_name": app.globalData.userInfo.nickName
       },
       header: {
         'Content-Type': 'application/json'

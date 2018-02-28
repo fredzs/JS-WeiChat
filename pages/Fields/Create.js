@@ -1,4 +1,5 @@
 // pages/Fields/Create.js
+var app = getApp();
 Page({
   data: {
     toast1Hidden: true,
@@ -59,7 +60,8 @@ Page({
       data: {
         "field_name": that.data.field_name,
         "field_type": that.data.field_type[0],
-        "field_unit": that.data.field_unit
+        "field_unit": that.data.field_unit,
+        "user_name": app.globalData.userInfo.nickName
       },
       header: {
         'Content-Type': 'application/json'
