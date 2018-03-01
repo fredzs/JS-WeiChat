@@ -55,7 +55,7 @@ Page({
     var that = this;
     console.log(this.data)
     wx.request({
-      url: 'https://fredirox.com/api/create_field',
+      url: app.get_url() + "create_field",
       method: 'POST',
       data: {
         "field_name": that.data.field_name,

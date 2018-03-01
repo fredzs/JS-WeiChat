@@ -31,5 +31,6 @@
   <view class="section" hidden="{{modalHidden}}">
     <text class="field_name" space="true">{{item.field_name}} :  </text>
     <text class="field_value">{{item.field_value}}</text>
+      <text class="field_value" wx:if="{{item.field_unit!=''}}"> ({{item.field_unit}})</text>
   </view>
 </view>

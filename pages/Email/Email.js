@@ -20,7 +20,7 @@ Page({
   Day: function () {
     var that = this;
     wx.request({
-      url: 'https://fredirox.com/api/send_daily_email',
+      url: app.get_url() + "send_daily_email",
       method: 'POST',
       data: {
         "date": that.data.date,

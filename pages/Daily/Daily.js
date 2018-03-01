@@ -19,17 +19,20 @@ Page({
     modalHidden5: true,
     modalHidden6: true,
     notice_str: '',
-    index: 0
+    index: 0,
+    empty_fields: ""
   },
   check_input: function () {
+    var that = this
     var f = this.data.extra_fields
     var l = this.data.fields_name
+    var empty_list = []
     for (var field in l) {
       if (f[l[field].field_id] == "") {
-        return false
+        empty_list.push(l[field].field_name)
       }
     }
-    return true
+    return empty_list
   },
   submint_user_input: function (e) {
     console.log("报送人姓名改变：" + e.detail.value)
@@ -46,15 +49,16 @@ Page({
       modalHidden: false
     })
   },
-  modalTap3: function (e) {
+  modalTap3: function (empty_list) {
     this.setData({
-      modalHidden3: false
+      modalHidden3: false,
+      empty_fields: empty_list
     })
   },
   confirm_one: function (){
     var that = this;
     wx.request({
-      url: 'https://fredirox.com/api/find',
+      url: app.get_url() + "find",
       data: {
         "dept_id": that.data.dept_id,
         "date": that.data.date,
@@ -88,7 +92,7 @@ Page({
   submit: function () {
     var that = this;
     wx.request({
-      url: 'https://fredirox.com/api/submit',
+      url: app.get_url() + "submit",
       method: 'POST',
       data: {
         "dept_id": that.data.dept_id,
@@ -177,7 +181,7 @@ Page({
       var that = this
       //获取网点列表  
       wx.request({
-        url: "https://fredirox.com/api/branches",
+        url: app.get_url() + "branches",
         header: {
           "Content-Type": "application/json"
         },
@@ -204,7 +208,7 @@ Page({
       })
       //获取字段名列表
       wx.request({
-        url: "https://fredirox.com/api/fields_name",
+        url: app.get_url() + "fields_name",
         header: {
           "Content-Type": "application/json"
         },
@@ -250,12 +254,12 @@ Page({
     this.setData({
       extra_fields: e.detail.value
     })
-    var check = this.check_input();
-    if (check) {
+    var empty_list = this.check_input();
+    if (empty_list.length == 0) {
       this.modalTap();
     }
     else {
-      this.modalTap3();
+      this.modalTap3(empty_list);
     }
   },
   formReset: function () {

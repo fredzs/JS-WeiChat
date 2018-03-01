@@ -41,6 +41,10 @@
         <input type="{{fields_name[index].field_type == 'string'? 'text':'digit'}}" name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' />
       </view>
     </view>
+    <view class="section">
+      <view class="">备注:</view>
+        <textarea class="textarea" placeholder="其他报送内容，非必填。" auto-height name="textarea" cursor-spacing="100"/>
+    </view>
     <view class="section btn-area">
       <button type="primary" formType="submit" class="submit_button">提交</button>
       <button type="warn" formType="reset" class="submit_button">清空</button>
@@ -62,7 +66,9 @@
       <view> 清空成功 </view>
     </modal>
     <modal class="modal" hidden="{{modalHidden3}}" no-cancel bindconfirm="modalChange3" bindcancel="modalChange3">
-      <view> 存在空白项，请填写完整再提交！ </view>
+      <view> 以下字段尚未填写，请填写完整再提交！ </view>
+      <view>{{empty_fields}}</view>
+      <view> (无业绩请填“0”或“无”) </view>
     </modal>
     <modal class="modal" hidden="{{modalHidden4}}" no-cancel bindconfirm="modalChange4">
       <view> 服务器忙碌，无法提交业绩，请联系管理员！ </view>

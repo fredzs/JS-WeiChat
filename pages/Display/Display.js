@@ -42,7 +42,7 @@ Page({
     })
     var that = this
     wx.request({
-      url: "https://fredirox.com/api/check",
+      url: app.get_url() + "check",
       header: {
         "Content-Type": "application/json"
       },
@@ -66,7 +66,7 @@ Page({
         //console.log(that.data.dept - 1, that.data.length_1)
         if (that.data.depts.length != 0) {
           wx.request({
-            url: "https://fredirox.com/api/display",
+            url: app.get_url() + "display",
             header: {
               "Content-Type": "application/json"
             },
@@ -104,7 +104,7 @@ Page({
   onLoad: function (options) {
     var that = this
     wx.request({
-      url: "https://fredirox.com/api/check",
+      url: app.get_url() + "check",
       header: {
         "Content-Type": "application/json"
       },
@@ -125,7 +125,7 @@ Page({
         //console.log(that.data.dept - 1, that.data.length_1)
         if (that.data.depts.length != 0) {
           wx.request({
-            url: "https://fredirox.com/api/display",
+            url: app.get_url() + "display",
             header: {
               "Content-Type": "application/json"
             },

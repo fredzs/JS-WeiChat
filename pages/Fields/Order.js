@@ -69,7 +69,7 @@ Page({
       console.log("new_order", new_order);
 
       wx.request({
-        url: 'https://fredirox.com/api/sort_field',
+        url: app.get_url() + "sort_field",
         method: 'POST',
         data: {
           "new_order": new_order,
@@ -91,7 +91,7 @@ Page({
   onLoad: function (options) {
     var that = this
     wx.request({
-      url: "https://fredirox.com/api/fields",
+      url: app.get_url() + "fields",
       header: {
         "Content-Type": "application/json"
       },

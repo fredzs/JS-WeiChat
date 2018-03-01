@@ -20,6 +20,7 @@ Page({
     })
   },
   onLoad: function () {
+    console.log('测试开关为：' + app.globalData.running_mode + "，使用URL：" + app.get_url())
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -105,7 +106,7 @@ Page({
     var that = this
     console.log("admin_password:" + this.data.admin_password)
     wx.request({
-      url: 'https://fredirox.com/api/admin',
+      url: app.get_url() + "admin",
       data: {
         "admin_password": that.data.admin_password,
         "user_name": app.globalData.userInfo.nickName

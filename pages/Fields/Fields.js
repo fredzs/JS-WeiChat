@@ -12,7 +12,7 @@ Page({
   onLoad: function (options) {
     var that = this
     wx.request({
-      url: "https://fredirox.com/api/fields",
+      url: app.get_url() + "fields",
       header: {
         "Content-Type": "application/json"
       },
@@ -33,7 +33,7 @@ Page({
     var that = this
     console.log('field_unit改变，携带值为', e.detail.value)
     wx.request({
-      url: 'https://fredirox.com/api/update_field',
+      url: app.get_url() + "update_field",
       method: 'POST',
       data: {
         "field_id": e.currentTarget.dataset.id,
@@ -57,7 +57,7 @@ Page({
     var that = this
     console.log('picker发送选择改变，携带值为', this.data.type_list[e.detail.value])
     wx.request({
-      url: 'https://fredirox.com/api/update_field',
+      url: app.get_url() + "update_field",
       method: 'POST',
       data: {
         "field_id": e.currentTarget.dataset.id,
@@ -86,7 +86,7 @@ Page({
     var that = this
     console.log('picker发送选择改变，携带值为', e.detail.value)
     wx.request({
-      url: 'https://fredirox.com/api/update_field',
+      url: app.get_url() + "update_field",
       method: 'POST',
       data: {
         "field_id": e.currentTarget.dataset.id,

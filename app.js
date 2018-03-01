@@ -12,6 +12,7 @@ function date_str(date) {
   }
   return yy + '-' + mm + '-' + dd
 };
+
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -49,7 +50,20 @@ App({
   globalData: {
     userInfo: null,
     today_str: date_str(today),
-    request_url: 'https://fredirox.com/api/find',
-    test_url: 'https://127.0.0.1:5000/api/find',
-  }
+    request_url: 'https://fredirox.com/api/',
+    local_url: 'https://127.0.0.1:5000/api/',
+    test_url: 'https://fredirox.com/test/api/',
+    running_mode: "developing"
+  },
+  get_url: function() {
+    var running_mode = this.globalData.running_mode
+    if (running_mode== "local_testing") {
+      var url = this.globalData.local_url
+    }else if(running_mode == "developing") {
+      var url = this.globalData.test_url
+    } else if (running_mode == "online_running") {
+      var url = this.globalData.request_url
+    } 
+    return url
+  },
 })

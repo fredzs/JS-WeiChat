@@ -39,7 +39,7 @@ Page({
     })
     var that = this
     wx.request({
-      url: "https://fredirox.com/api/check",
+      url: app.get_url()+ "check",
       header: {
         "Content-Type": "application/json"
       },
@@ -70,7 +70,7 @@ Page({
   onLoad: function (options) {
     var that = this
     wx.request({
-      url: "https://fredirox.com/api/check",
+      url: app.get_url() + "check",
       header: {
         "Content-Type": "application/json"
       },
