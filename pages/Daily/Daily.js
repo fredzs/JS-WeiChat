@@ -19,17 +19,21 @@ Page({
     modalHidden5: true,
     modalHidden6: true,
     notice_str: '',
-    index: 0,
-    empty_fields: ""
+    index: -1,
+    empty_fields: "",
+    comments: ""
   },
   check_input: function () {
     var that = this
     var f = this.data.extra_fields
     var l = this.data.fields_name
     var empty_list = []
+    if (this.data.index == -1){
+      empty_list.push("[网点名称]")
+    }
     for (var field in l) {
       if (f[l[field].field_id] == "") {
-        empty_list.push(l[field].field_name)
+        empty_list.push("["+l[field].field_name+"]")
       }
     }
     return empty_list
@@ -99,7 +103,8 @@ Page({
         "date": that.data.date,
         "submit_user": that.data.nick_name,//that.data.submit_user,
         "extra_fields": that.data.extra_fields,
-        "user_name": app.globalData.userInfo.nickName
+        "user_name": app.globalData.userInfo.nickName,
+        "comments": that.data.comments
       },
       header: {
         'Content-Type': 'application/json'
@@ -198,7 +203,7 @@ Page({
           } else {
             that.setData({
               dept_list: res.data,
-              index: 0, //res.data[0].dept_id
+              index: -1, //res.data[0].dept_id
             })
           }
         },
@@ -248,6 +253,12 @@ Page({
       })
     }
     
+  },
+  bind_comments: function (e){
+    console.log('输入备注：' + e.detail.value);
+    this.setData({
+      comments: e.detail.value
+    })
   },
   formSubmit: function (e) {
     console.log('form发生了submit事件');
