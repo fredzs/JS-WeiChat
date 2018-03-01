@@ -53,7 +53,7 @@ App({
     request_url: 'https://fredirox.com/api/',
     local_url: 'https://127.0.0.1:5001/api/',
     test_url: 'https://fredirox.com/test/api/',
-    running_mode: "local_testing"
+    running_mode: "developing"
   },
   get_url: function() {
     var running_mode = this.globalData.running_mode
