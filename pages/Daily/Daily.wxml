@@ -30,7 +30,7 @@
       <view class="section">
         <view class="section_title">
           <view class="field_name_1">{{item.field_name}}</view>
-          <view wx:if="{{item.field_type=='int'}}">
+          <view wx:if="{{item.field_type!='string'}}">
             <view class="field_name_2">({{item.field_unit}})</view>
           </view>
           <view class="field_name_3">
@@ -38,12 +38,14 @@
         </view>
       </view>
       <view class="section">
-        <input type="{{fields_name[index].field_type == 'string'? 'text':'digit'}}" name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' />
+        <input wx:if="{{fields_name[index].field_type == 'string'}}" type='text' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='100'/>
+        <input wx:if="{{fields_name[index].field_type == 'float'}}" type='digit' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='10' bindinput='bind_check_float' />
+        <input wx:if="{{fields_name[index].field_type == 'int'}}" type='number' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='5'/>
       </view>
     </view>
     <view class="section">
       <view class="">备注:</view>
-        <textarea class="textarea" placeholder="其他报送内容，非必填。" auto-height name="textarea" cursor-spacing="100"/>
+      <textarea class="textarea" placeholder="其他报送内容，非必填。" auto-height name="textarea" cursor-spacing="100" />
     </view>
     <view class="section btn-area">
       <button type="primary" formType="submit" class="submit_button">提交</button>

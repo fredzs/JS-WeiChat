@@ -109,7 +109,7 @@ Page({
       url: app.get_url() + "admin",
       data: {
         "admin_password": that.data.admin_password,
-        "user_name": app.globalData.userInfo.nickName
+        "user_name": app.globalData.user_name
       },
       header: {
         'Content-Type': 'application/json'

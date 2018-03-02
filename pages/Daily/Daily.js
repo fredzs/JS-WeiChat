@@ -62,7 +62,7 @@ Page({
       data: {
         "dept_id": that.data.dept_id,
         "date": that.data.date,
-        "user_name": app.globalData.userInfo.nickName
+        "user_name": app.globalData.user_name
       },
       header: {
         "Content-Type": "application/json"
@@ -99,7 +99,7 @@ Page({
         "date": that.data.date,
         "submit_user": that.data.nick_name,//that.data.submit_user,
         "extra_fields": that.data.extra_fields,
-        "user_name": app.globalData.userInfo.nickName
+        "user_name": app.globalData.user_name
       },
       header: {
         'Content-Type': 'application/json'
@@ -175,7 +175,7 @@ Page({
   onLoad: function (options) {
     if (app.globalData.userInfo != null){
       this.setData({
-        nick_name: app.globalData.userInfo.nickName,
+        nick_name: app.globalData.user_name,
         date: app.globalData.today_str
       })
       var that = this
@@ -186,7 +186,7 @@ Page({
           "Content-Type": "application/json"
         },
         data:{
-          "user_name": app.globalData.userInfo.nickName
+          "user_name": app.globalData.user_name
         },
         success: function (res) {
           console.log("/api/branches返回值：")
@@ -213,7 +213,7 @@ Page({
           "Content-Type": "application/json"
         },
         data:{
-          "user_name": app.globalData.userInfo.nickName
+          "user_name": app.globalData.user_name
         },
         success: function (res) {
           console.log("/api/fields_name返回值：")

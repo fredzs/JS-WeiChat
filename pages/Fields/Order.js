@@ -73,7 +73,7 @@ Page({
         method: 'POST',
         data: {
           "new_order": new_order,
-          "user_name": app.globalData.userInfo.nickName
+          "user_name": app.globalData.user_name
         },
         header: {
           'Content-Type': 'application/json'
@@ -96,7 +96,7 @@ Page({
         "Content-Type": "application/json"
       },
       data:{
-        "user_name": app.globalData.userInfo.nickName
+        "user_name": app.globalData.user_name
       },
       success: function (res) {
         console.log("/api/fields返回值：")

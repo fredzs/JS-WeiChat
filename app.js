@@ -12,7 +12,17 @@ function date_str(date) {
   }
   return yy + '-' + mm + '-' + dd
 };
+var name_map = { "阿戴": "戴俊捷", "水木": "王毅", "钢子": "李钢", "果儿": "黄英", "秀儿": "王秀荣", "ying": "英雪", "肖任飛": "肖任飞","跃":"王跃","":""}
 
+function mapNickname(nickname) {
+  var user_name = ""
+  user_name = name_map[nickname]
+  if(!user_name){
+    user_name = nickname
+  }
+  console.log('用户名：' + user_name)
+  return user_name
+}
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -35,7 +45,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+              this.globalData.user_name = mapNickname(res.userInfo.nickName)
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -46,14 +56,16 @@ App({
         }
       }
     })
+
   },
   globalData: {
     userInfo: null,
+    user_name: null,
     today_str: date_str(today),
     request_url: 'https://fredirox.com/api/',
     local_url: 'https://127.0.0.1:5000/api/',
     test_url: 'https://fredirox.com/test/api/',
-    running_mode: "developing"
+    running_mode: "online_running"
   },
   get_url: function() {
     var running_mode = this.globalData.running_mode

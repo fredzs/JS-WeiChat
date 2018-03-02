@@ -24,7 +24,7 @@ Page({
       method: 'POST',
       data: {
         "date": that.data.date,
-        "user_name": app.globalData.userInfo.nickName
+        "user_name": app.globalData.user_name
       },
       header: {
         'Content-Type': 'application/json'

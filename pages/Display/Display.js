@@ -48,7 +48,7 @@ Page({
       },
       data: {
         "date": this.data.year + "-" + this.data.month + "-" + this.data.day,
-        "user_name": app.globalData.userInfo.nickName
+        "user_name": app.globalData.user_name
       },
       success: function (res) {
         console.log("/api/check返回值：")
@@ -73,7 +73,7 @@ Page({
             data: {
               "date": that.data.year + "-" + that.data.month + "-" + that.data.day,
               "dept_name": that.data.depts[that.data.dept - 1].dept_name,
-              "user_name": app.globalData.userInfo.nickName
+              "user_name": app.globalData.user_name
             },
             success: function (res) {
               console.log("/api/display返回值：")
@@ -109,7 +109,7 @@ Page({
         "Content-Type": "application/json"
       },
       data:{
-        "user_name": app.globalData.userInfo.nickName
+        "user_name": app.globalData.user_name
       },
       success: function (res) {
         console.log("/api/check返回值：")
@@ -132,7 +132,7 @@ Page({
             data: {
               "date": app.globalData.today_str,
               "dept_name": that.data.depts[that.data.dept - 1].dept_name,
-              "user_name": app.globalData.userInfo.nickName
+              "user_name": app.globalData.user_name
             },
             success: function (res) {
               console.log("/api/display返回值：")

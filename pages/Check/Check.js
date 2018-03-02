@@ -45,7 +45,7 @@ Page({
       },
       data: {
         "date": this.data.year + "-" + this.data.month + "-" + this.data.day,
-        "user_name": app.globalData.userInfo.nickName
+        "user_name": app.globalData.user_name
       },
       success: function (res) {
         console.log("/api/check返回值：")
@@ -75,7 +75,7 @@ Page({
         "Content-Type": "application/json"
       },
       data:{
-        "user_name": app.globalData.userInfo.nickName
+        "user_name": app.globalData.user_name
       },
       success: function (res) {
         console.log("/api/check返回值：")
