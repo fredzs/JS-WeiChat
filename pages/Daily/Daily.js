@@ -1,5 +1,7 @@
 var app = getApp();
-//var focus_list=[]
+var empty_list = []
+var wrong_float_list = []
+var flist = new Set()
 Page({
   data: {
     // text:"这是一个页面"  
@@ -7,7 +9,7 @@ Page({
     dept_list: {},
     fields_name: {},
     //focus_list: [],
-    dept_id: 1,
+    dept_id: 999,
     date: "",
     submit_user: "",
     extra_fields: {},
@@ -18,25 +20,41 @@ Page({
     modalHidden4: true,
     modalHidden5: true,
     modalHidden6: true,
+    modalHidden7: true,
     notice_str: '',
-    index: -1,
+    index: 999,
     empty_fields: "",
+    wrong_floats: "",
     comments: ""
   },
   check_input: function () {
     var that = this
     var f = this.data.extra_fields
     var l = this.data.fields_name
-    var empty_list = []
-    if (this.data.index == -1){
+    empty_list = []
+    wrong_float_list = []
+    if (this.data.dept_id == 999) {
       empty_list.push("[网点名称]")
     }
+      console.log(flist)
     for (var field in l) {
-      if (f[l[field].field_id] == "") {
-        empty_list.push("["+l[field].field_name+"]")
+      var value = f[l[field].field_id]
+      if (value == "") {
+        empty_list.push("[" + l[field].field_name + "]")
+      }
+      else if (flist.has(l[field].field_id)) {
+        if (!that.check_float(value)) {
+          wrong_float_list.push("[" + l[field].field_name + "]")
+        }
       }
     }
-    return empty_list
+    return
+  },
+  check_float: function (str) {
+    var r = /^\d+(\.\d+)?$/　　//非负浮点数
+    var result = r.test(str); //str为你要判断的字符 执行返回结果 true 或 false 
+    //console.log(str + ":" + result)
+    return result
   },
   submint_user_input: function (e) {
     console.log("报送人姓名改变：" + e.detail.value)
@@ -53,13 +71,19 @@ Page({
       modalHidden: false
     })
   },
-  modalTap3: function (empty_list) {
+  modalTap3: function () {
     this.setData({
       modalHidden3: false,
       empty_fields: empty_list
     })
   },
-  confirm_one: function (){
+  modalTap4: function () {
+    this.setData({
+      modalHidden7: false,
+      wrong_floats: wrong_float_list
+    })
+  },
+  confirm_one: function () {
     var that = this;
     wx.request({
       url: app.get_url() + "find",
@@ -79,12 +103,12 @@ Page({
           submit_user: submit_user,
           submit_time: submit_time,
         })
-        if (submit_user != ""){
+        if (submit_user != "") {
           that.setData({
             modalHidden: true,
             modalHidden5: false,
           })
-        } else{
+        } else {
           that.submit()
         }
       },
@@ -103,7 +127,7 @@ Page({
         "date": that.data.date,
         "submit_user": that.data.nick_name,//that.data.submit_user,
         "extra_fields": that.data.extra_fields,
-        "user_name": app.globalData.user_name
+        "user_name": app.globalData.user_name,
         "comments": that.data.comments
       },
       header: {
@@ -129,7 +153,7 @@ Page({
     })
   },
   cancel_one: function (e) {
-    console.log(e);
+    //console.log(e);
     this.setData({
       modalHidden: true,
       modalHidden5: true,
@@ -151,6 +175,11 @@ Page({
   modalChange3: function (e) {
     this.setData({
       modalHidden3: true
+    })
+  },
+  modalChange7: function (e) {
+    this.setData({
+      modalHidden7: true
     })
   },
   modalChange4: function (e) {
@@ -178,7 +207,7 @@ Page({
   //   focus_list[e]
   // },
   onLoad: function (options) {
-    if (app.globalData.userInfo != null){
+    if (app.globalData.userInfo != null) {
       this.setData({
         nick_name: app.globalData.user_name,
         date: app.globalData.today_str
@@ -190,20 +219,24 @@ Page({
         header: {
           "Content-Type": "application/json"
         },
-        data:{
+        data: {
           "user_name": app.globalData.user_name
         },
         success: function (res) {
           console.log("/api/branches返回值：")
-          console.log(res.data)
+          //console.log(res.data)
+          var branch_list = []
+          branch_list.push({ "dept_id": 999, "dept_name": "请选择" })
+          branch_list = branch_list.concat(res.data)
+          console.log(branch_list)
           if (res.statusCode == 502) {
             that.setData({
               modalHidden4: false
             })
           } else {
             that.setData({
-              dept_list: res.data,
-              index: -1, //res.data[0].dept_id
+              dept_list: branch_list,
+              index: 999, //res.data[0].dept_id
             })
           }
         },
@@ -217,7 +250,7 @@ Page({
         header: {
           "Content-Type": "application/json"
         },
-        data:{
+        data: {
           "user_name": app.globalData.user_name
         },
         success: function (res) {
@@ -245,32 +278,47 @@ Page({
           console.log(err)
         }
       })
-    // 页面初始化 options为页面跳转所带来的参数  
+      // 页面初始化 options为页面跳转所带来的参数  
     } else {
       console.log('无获取昵称权限');
       this.setData({
         modalHidden6: false
       })
     }
-    
+
   },
-  bind_comments: function (e){
+  bind_comments: function (e) {
     console.log('输入备注：' + e.detail.value);
     this.setData({
       comments: e.detail.value
     })
   },
+  bind_float: function (e) {
+    console.log(e);
+    var t = e.currentTarget.dataset.t
+    if (t == 'f') {
+      var idd = e.currentTarget.dataset.idd
+      console.log(idd);      
+      var d = { idd: t}
+      flist.add(idd)
+    }
+  },
   formSubmit: function (e) {
     console.log('form发生了submit事件');
+    console.log(e);
     this.setData({
       extra_fields: e.detail.value
     })
-    var empty_list = this.check_input();
-    if (empty_list.length == 0) {
-      this.modalTap();
-    }
-    else {
-      this.modalTap3(empty_list);
+    this.check_input();
+    if (wrong_float_list.length == 0) {
+      if (empty_list.length == 0) {
+        this.modalTap();
+      }
+      else {
+        this.modalTap3();
+      }
+    } else {
+      this.modalTap4();
     }
   },
   formReset: function () {

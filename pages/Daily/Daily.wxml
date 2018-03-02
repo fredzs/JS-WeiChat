@@ -9,7 +9,7 @@
     <view class="section_title_short">网点名称:</view>
     <view class='form_group'>
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{dept_list}}" range-key="dept_name">
-        <view wx:if="{{index!=-1}}" class="picker">
+        <view wx:if="{{index!=999}}" class="picker">
           {{dept_list[index].dept_name}}
         </view>
         <view wx:else class="picker">
@@ -41,14 +41,14 @@
         </view>
       </view>
       <view class="section">
-        <input wx:if="{{fields_name[index].field_type == 'string'}}" type='text' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='100'/>
-        <input wx:if="{{fields_name[index].field_type == 'float'}}" type='digit' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='10' bindinput='bind_check_float' />
-        <input wx:if="{{fields_name[index].field_type == 'int'}}" type='number' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='5'/>
+        <input wx:if="{{fields_name[index].field_type == 'string'}}" type='text' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='100' cursor-spacing="100" />
+        <input wx:if="{{fields_name[index].field_type == 'float'}}" type='digit' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='10' cursor-spacing="100" bindblur='bind_float' data-t='f' data-idd='{{fields_name[index].field_id}}'/>
+        <input wx:if="{{fields_name[index].field_type == 'int'}}" type='number' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='5' cursor-spacing="100" />
       </view>
     </view>
     <view class="section">
       <view class="">备注:</view>
-        <textarea class="textarea" placeholder="其他报送内容，非必填。" auto-height name="comments" cursor-spacing="100" bindblur='bind_comments'/>
+      <textarea class="textarea" placeholder="其他报送内容，非必填。" auto-height name="comments" cursor-spacing="100" bindblur='bind_comments' />
     </view>
     <view class="section btn-area">
       <button type="primary" formType="submit" class="submit_button">提交</button>
@@ -79,6 +79,11 @@
       <view> 以下字段尚未填写，请填写完整再提交！ </view>
       <view>{{empty_fields}}</view>
       <view> (无业绩请填“0”或“无”) </view>
+    </modal>
+    <modal class="modal" hidden="{{modalHidden7}}" no-cancel bindconfirm="modalChange7" bindcancel="modalChange7">
+      <view> 以下字段格式错误，请修改再提交！ </view>
+      <view>{{wrong_floats}}</view>
+      <view> (必须是整数或者小数) </view>
     </modal>
     <modal class="modal" hidden="{{modalHidden4}}" no-cancel bindconfirm="modalChange4">
       <view> 服务器忙碌，无法提交业绩，请联系管理员！ </view>
