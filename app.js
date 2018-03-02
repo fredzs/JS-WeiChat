@@ -12,12 +12,12 @@ function date_str(date) {
   }
   return yy + '-' + mm + '-' + dd
 };
-var name_map = { "阿戴": "戴俊捷", "水木": "王毅", "钢子": "李钢", "果儿": "黄英", "秀儿": "王秀荣", "ying": "英雪", "肖任飛": "肖任飞","跃":"王跃","爱的摇篮":"罗瑞勤"}
+var name_map = { "阿戴": "戴俊捷", "水木": "王毅", "钢子": "李钢", "果儿": "黄英", "秀儿": "王秀荣", "ying": "英雪", "肖任飛": "肖任飞", "跃": "王跃", "爱的摇篮": "罗瑞勤", "張麟": "张麟", "爱的摇篮": "罗瑞勤", "Gracy": "陈雅玲", "BOOKSKY~崔泯": "崔泯", "": "", "": "", "": "", "": "", "": "" }
 
 function mapNickname(nickname) {
   var user_name = ""
   user_name = name_map[nickname]
-  if(!user_name){
+  if (!user_name) {
     user_name = nickname
   }
   console.log('用户名：' + user_name)
@@ -67,15 +67,15 @@ App({
     test_url: 'https://fredirox.com/test/api/',
     running_mode: "online_running"
   },
-  get_url: function() {
+  get_url: function () {
     var running_mode = this.globalData.running_mode
-    if (running_mode== "local_testing") {
+    if (running_mode == "local_testing") {
       var url = this.globalData.local_url
-    }else if(running_mode == "developing") {
+    } else if (running_mode == "developing") {
       var url = this.globalData.test_url
     } else if (running_mode == "online_running") {
       var url = this.globalData.request_url
-    } 
+    }
     return url
   },
 })
