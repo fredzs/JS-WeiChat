@@ -9,8 +9,11 @@
     <view class="section_title_short">网点名称:</view>
     <view class='form_group'>
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{dept_list}}" range-key="dept_name">
-        <view class="picker">
+        <view wx:if="{{index!=-1}}" class="picker">
           {{dept_list[index].dept_name}}
+        </view>
+        <view wx:else class="picker">
+          请选择
         </view>
       </picker>
     </view>
@@ -45,7 +48,7 @@
     </view>
     <view class="section">
       <view class="">备注:</view>
-      <textarea class="textarea" placeholder="其他报送内容，非必填。" auto-height name="textarea" cursor-spacing="100" />
+        <textarea class="textarea" placeholder="其他报送内容，非必填。" auto-height name="comments" cursor-spacing="100" bindblur='bind_comments'/>
     </view>
     <view class="section btn-area">
       <button type="primary" formType="submit" class="submit_button">提交</button>
@@ -59,14 +62,19 @@
   <!-- 确认框 及 提示框 -->
   <view class="page_bd">
     <modal title="确认" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">
-      确认提交么？
+      确认[日期]和[网点名称]正确，并提交么？
     </modal>
     <modal title="业绩已存在" confirm-text="覆盖" cancel-text="再检查一下" hidden="{{modalHidden5}}" mask bindconfirm="confirm_two" bindcancel="cancel_one">
       该业绩已由{{submit_user}}于{{submit_time}}报送。请确认网点名和日期正确，重复提交将覆盖原业绩，是否继续？
     </modal>
+
+    <modal class="modal" title="清空确认" confirm-text="清空" cancel-text="不清空" hidden="true" mask bindconfirm="confirm_clear" bindcancel="cancel_clear">
+      确认清空所有已填的内容吗？
+    </modal>
     <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">
       <view> 清空成功 </view>
     </modal>
+
     <modal class="modal" hidden="{{modalHidden3}}" no-cancel bindconfirm="modalChange3" bindcancel="modalChange3">
       <view> 以下字段尚未填写，请填写完整再提交！ </view>
       <view>{{empty_fields}}</view>

@@ -34,3 +34,10 @@
       <text class="field_value" wx:if="{{item.field_unit!=''}}"> ({{item.field_unit}})</text>
   </view>
 </view>
+<view class="section">
+  <view class="section" hidden="{{modalHidden}}">
+    <text class="field_name" space="true">备注 :  </text>
+    <text wx:if="{{comments!=''}}" class="field_value">{{comments}}</text>
+    <text wx:else class="field_value">无</text>
+  </view>
+</view>

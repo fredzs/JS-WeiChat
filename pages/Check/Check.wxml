@@ -13,7 +13,7 @@
   </picker-view>
 </view>
 <view class="section">
-  <view class="section_title">未报送业绩网点：</view>
+  <view class="section_title">未报送业绩网点<text wx:if="{{length_2 > 0}}">({{length_2}}个)</text>：</view>
   <view wx:if="{{length_2 > 0}}">
     <view wx:for="{{check_list.unsubmission_list}}" wx:key="dept_name">
       <view class="section_left">
@@ -27,7 +27,7 @@
 </view>
 <view class="section_title"> </view>
 <view class="section">
-  <view class="section_title">已报送业绩网点：</view>
+  <view class="section_title">已报送业绩网点<text wx:if="{{length_1 > 0}}">({{length_1}}个)</text>：</view>
   <view wx:if="{{length_1 > 0}}">
     <view class="section_title_left">网点</view>
     <view class="section_title_right">报送人</view>

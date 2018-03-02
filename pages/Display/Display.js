@@ -29,7 +29,8 @@ Page({
     submit_user: "",
     submit_time: "",
     extra_fields: [],
-    modalHidden: false
+    modalHidden: false,
+    comments: ""
   },
   bindChange: function (e) {
     //console.log('Date发送选择改变，携带值为', e.detail.value)
@@ -82,6 +83,7 @@ Page({
                 modalHidden: false,
                 submit_user: res.data.submit_user,
                 submit_time: res.data.submit_time,
+                comments: res.data.comments,
                 extra_fields: res.data.extra_fields,
               })
             },
@@ -141,6 +143,7 @@ Page({
                 modalHidden: false,
                 submit_user: res.data.submit_user,
                 submit_time: res.data.submit_time,
+                comments: res.data.comments,
                 extra_fields: res.data.extra_fields,
               })
             },
