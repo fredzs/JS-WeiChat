@@ -4,7 +4,7 @@ Page({
 
   data: {
     date: app.globalData.today_str,
-    date_begin: "2018-02-01",
+    date_begin: "2018-03-01",
     date_end: app.globalData.today_str,
     toastHidden: true,
     notice_str: '',
@@ -17,23 +17,58 @@ Page({
   onLoad: function (options) {
 
   },
-  Day: function () {
+  Day: function (e) {
     var that = this;
     wx.request({
-      url: app.get_url() + "send_daily_email",
+      url: app.get_url() + "send_range_email",
       method: 'POST',
       data: {
-        "date": that.data.date,
-        "user_name": app.globalData.user_name
+        "date_begin": that.data.date,
+        "date_end": that.data.date,
+        "user_name": app.globalData.user_name,
+        "count_only": e.currentTarget.dataset.count_only
       },
       header: {
         'Content-Type': 'application/json'
       },
       success: function (res) {
-        console.log(res.data)
+        console.log("单日统计：" + res.data)
+        if (res.data == "success"){
+          var str = '邮件发送成功!'
+        } else {
+          var str = '邮件发送失败，请联系管理员!'
+        }
         that.setData({
           toastHidden: false,
-          notice_str: '邮件发送成功!'
+          notice_str: str
+        });
+      }
+    })
+  },
+  Range: function (e) {
+    var that = this;
+    wx.request({
+      url: app.get_url() + "send_range_email",
+      method: 'POST',
+      data: {
+        "date_begin": that.data.date_begin,
+        "date_end": that.data.date_end,
+        "user_name": app.globalData.user_name,
+        "count_only": e.currentTarget.dataset.count_only
+      },
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        console.log("期间统计：" + res.data)
+        if (res.data == "success") {
+          var str = '邮件发送成功!'
+        } else {
+          var str = '邮件发送失败，请联系管理员!'
+        }
+        that.setData({
+          toastHidden: false,
+          notice_str: str
         });
       }
     })
@@ -55,7 +90,5 @@ Page({
     this.setData({
       date_end: e.detail.value
     })
-  },
-  Range: function () {
   },
 })

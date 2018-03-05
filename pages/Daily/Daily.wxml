@@ -41,9 +41,9 @@
         </view>
       </view>
       <view class="section">
-        <input wx:if="{{fields_name[index].field_type == 'string'}}" type='text' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='100' cursor-spacing="100" />
-        <input wx:if="{{fields_name[index].field_type == 'float'}}" type='digit' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='10' cursor-spacing="100" bindblur='bind_float' data-t='f' data-idd='{{fields_name[index].field_id}}'/>
-        <input wx:if="{{fields_name[index].field_type == 'int'}}" type='number' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='5' cursor-spacing="100" />
+        <input wx:if="{{fields_name[index].field_type == 'string'}}" type='text' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='100' cursor-spacing="120"/>
+        <input wx:if="{{fields_name[index].field_type == 'float'}}" type='digit' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='10' cursor-spacing="120" bindblur='bind_float' data-t='f' data-idd='{{fields_name[index].field_id}}'/>
+        <input wx:if="{{fields_name[index].field_type == 'int'}}" type='number' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='5' cursor-spacing="120" />
       </view>
     </view>
     <view class="section">

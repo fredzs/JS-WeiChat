@@ -1,39 +1,58 @@
 <!--pages/Email/Email.wxml-->
-<view class="container">
-  <picker mode="date" value="{{date}}" start="2018-02-01" end="{{date}}" bindchange="bindDateChange">
-    <view class="picker">
-      {{date}}
+<view class="container_1">
+  <text class="subtitle">单日汇总</text>
+  <view>
+    <picker mode="date" value="{{date}}" start="2018-02-01" end="{{date}}" bindchange="bindDateChange">
+      <view class="picker">
+        {{date}}
+      </view>
+    </picker>
+    <view class="button">
+      <button type="primary" bindtap="Day" data-count_only="true">生成统计数据</button>
     </view>
-  </picker>
-  <view class="button">
-    <button type="primary" bindtap="Day">立即发送当日统计邮件</button>
-  </view>
-  <view class="date">
-    <view class="left">
-      <picker mode="date" value="{{date_begin}}" start="2018-02-01" end="{{date}}" bindchange="bindDateBeginChange">
-        <text>起始日期：</text>
-        <view class="picker">
-          {{date_begin}}
-        </view>
-      </picker>
-    </view>
-    <view class="right">
-      <picker mode="date" value="{{date_end}}" start="2018-02-01" end="{{date}}" bindchange="bindDateEndChange">
-        <text>终止日期：</text>
-        <view class="picker">
-          {{date_end}}
-        </view>
-      </picker>
+    <view class="button">
+      <button type="primary" bindtap="Day" data-count_only="false">生成并发送邮件</button>
     </view>
   </view>
-  <view class="button">
-    <button type="primary" bindtap="Range">立即发送期间统计邮件</button>
+  <text class="subtitle">时间段汇总</text>
+  <view>
+    <view class="date">
+      <view class="left">
+        <picker mode="date" value="{{date_begin}}" start="2018-02-01" end="{{date}}" bindchange="bindDateBeginChange">
+          <text>起始日期：</text>
+          <view class="picker">
+            {{date_begin}}
+          </view>
+        </picker>
+      </view>
+      <view class="right">
+        <picker mode="date" value="{{date_end}}" start="2018-02-01" end="{{date}}" bindchange="bindDateEndChange">
+          <text>终止日期：</text>
+          <view class="picker">
+            {{date_end}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="button_1">
+      <button type="primary" bindtap="Range" data-count_only="true">生成统计数据</button>
+    </view>
+    <view class="button_1">
+      <button type="primary" bindtap="Range" data-count_only="false">生成并发送邮件</button>
+    </view>
   </view>
-  <view class="button">
-    <button type="primary" bindtap="">统计（开发中）</button>
+  <text class="subtitle">自定义汇总</text>
+  <view>
+    <view class="button">
+      <button type="primary" bindtap="">统计（开发中）</button>
+    </view>
   </view>
+<text>统计数据请在</text>
+<text selectable="true">https://www.fredirox.com/statistics/</text>
+<text>和</text>
+<text selectable="true">https://www.fredirox.com/xls/</text>
+<text>查看</text>
 </view>
-
 <!-- 黑框提示并消失 -->
 <toast hidden="{{toastHidden}}" bindchange="toastChange">
   {{notice_str}}

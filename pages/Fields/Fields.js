@@ -5,8 +5,8 @@ Page({
     fields: [],
     type_list: ["string", "int", "bool"],
     type_index: { "string": 0, "int": 1, "bool": 2 },
-    status_list: [false, true],
     status_index: { false: 0, true: 1 },
+    statistics_index: { false: 0, true: 1 },
     index: 1,
   },
   onLoad: function (options) {
@@ -107,6 +107,35 @@ Page({
     })
     var v = that.data.fields
     v[e.currentTarget.dataset.index].status = that.data.status_index[e.detail.value]
+    that.setData({
+      fields: v
+    })
+  },
+  bindSwitchChange2: function (e) {
+    var that = this
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    wx.request({
+      url: app.get_url() + "update_field",
+      method: 'POST',
+      data: {
+        "field_id": e.currentTarget.dataset.id,
+        "update_k": "statistics",
+        "update_v": that.data.statistics_index[e.detail.value],
+        "user_name": app.globalData.user_name
+      },
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        if (res.data == "success") {
+          console.log("已更新字段")
+        } else {
+          console.log("更新字段失败：" + res.data)
+        }
+      }
+    })
+    var v = that.data.fields
+    v[e.currentTarget.dataset.index].statistics = that.data.status_index[e.detail.value]
     that.setData({
       fields: v
     })

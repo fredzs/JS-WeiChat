@@ -135,11 +135,6 @@ Page({
       },
       success: function (res) {
         console.log(res.data)
-        that.setData({
-          modalHidden: true,
-          modalHidden5: true,
-          toast1Hidden: false,
-        })
         if (res.data == "success") {
           that.setData({
             notice_str: '提交成功'
@@ -149,6 +144,11 @@ Page({
             notice_str: '提交失败：' + res.data
           });
         }
+        that.setData({
+          modalHidden: true,
+          modalHidden5: true,
+          toast1Hidden: false,
+        })
       }
     })
   },

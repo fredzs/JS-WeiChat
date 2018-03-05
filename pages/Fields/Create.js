@@ -68,19 +68,19 @@ Page({
       },
       success: function (res) {
         console.log(res.data)
-        that.setData({
-          modalHidden: true,
-          toast1Hidden: false,
-        })
         if (res.data=="success"){
           that.setData({
             notice_str: '提交成功'
           });
         } else{
           that.setData({
-            notice_str: '提交失败：' + res.data
+            notice_str: '提交失败'
           });
         }
+        that.setData({
+          modalHidden: true,
+          toast1Hidden: false,
+        })
       }
     })
   },

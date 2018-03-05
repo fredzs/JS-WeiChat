@@ -12,7 +12,7 @@ function date_str(date) {
   }
   return yy + '-' + mm + '-' + dd
 };
-var name_map = { "阿戴": "戴俊捷", "水木": "王毅", "钢子": "李钢", "果儿": "黄英", "秀儿": "王秀荣", "ying": "英雪", "肖任飛": "肖任飞","跃":"王跃","爱的摇篮":"罗瑞勤"}
+var name_map = { "阿戴": "戴俊捷", "水木": "王毅", "钢子": "李钢", "果儿": "黄英", "秀儿": "王秀荣", "ying": "英雪", "肖任飛": "肖任飞", "跃": "王跃", "爱的摇篮": "罗瑞勤", "張麟": "张麟", "BOOKSKY~崔泯": "崔泯", "Gracy": "陈雅玲"}
 
 function mapNickname(nickname) {
   var user_name = ""
@@ -46,6 +46,9 @@ App({
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
               this.globalData.user_name = mapNickname(res.userInfo.nickName)
+              if (this.globalData.user_name == null){
+                this.globalData.user_name = res.userInfo.nickName
+              }
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
