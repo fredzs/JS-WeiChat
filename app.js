@@ -43,7 +43,7 @@ App({
                 url: that.get_url() + "user",
                 data: {
                   "nick_name": res.userInfo.nickName,
-                  "avatar_url": that.globalData.avatar_url
+                  "avatar_url": res.userInfo.avatarUrl
                 },
                 header: {
                   'Content-Type': 'application/json'
@@ -68,11 +68,6 @@ App({
                   });
                 }
               });
-
-              // this.globalData.user_name = mapNickname(res.userInfo.nickName)
-              // if (this.globalData.user_name == null){
-              //   this.globalData.user_name = res.userInfo.nickName
-              // }
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {

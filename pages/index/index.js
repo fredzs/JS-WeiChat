@@ -84,7 +84,11 @@ Page({
       wx.navigateTo({
         url: '../Daily/Daily'
       })
-    } else{
+    } else if (role == 'admin' || role == 'super_admin') {
+      wx.navigateTo({
+        url: '../Daily/Admin'
+      })
+    } else {
       wx.navigateTo({
         url: '../Daily/Admin'
       })
@@ -97,11 +101,15 @@ Page({
       wx.navigateTo({
         url: '../Display/History'
       })
-    }
-    else {
+    } else if (role == 'admin' || role == 'super_admin') {
       that.setData({
         toast1Hidden: false,
         notice_str: '您是管理员，请直接进入管理员页面！'
+      });
+    } else{
+      that.setData({
+        toast1Hidden: false,
+        notice_str: '您没有权限，请联系管理员！'
       });
     }
   },
