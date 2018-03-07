@@ -4,8 +4,12 @@ var wrong_float_list = []
 var flist = new Set()
 Page({
   data: {
-    dept_name: "",
+    // text:"这是一个页面"  
+    nick_name: "",
+    dept_list: {},
     fields_name: {},
+    //focus_list: [],
+    dept_id: 999,
     date: "",
     submit_user: "",
     extra_fields: {},
@@ -18,6 +22,7 @@ Page({
     modalHidden6: true,
     modalHidden7: true,
     notice_str: '',
+    index: 999,
     empty_fields: "",
     wrong_floats: "",
     comments: ""
@@ -28,6 +33,10 @@ Page({
     var l = this.data.fields_name
     empty_list = []
     wrong_float_list = []
+    if (this.data.dept_id == 999) {
+      empty_list.push("[网点名称]")
+    }
+    console.log(flist)
     for (var field in l) {
       var value = f[l[field].field_id]
       if (value == "") {
@@ -44,6 +53,7 @@ Page({
   check_float: function (str) {
     var r = /^\d+(\.\d+)?$/　　//非负浮点数
     var result = r.test(str); //str为你要判断的字符 执行返回结果 true 或 false 
+    //console.log(str + ":" + result)
     return result
   },
   submint_user_input: function (e) {
@@ -78,7 +88,7 @@ Page({
     wx.request({
       url: app.get_url() + "find",
       data: {
-        "dept_id": app.globalData.dept_info.dept_id,
+        "dept_id": that.data.dept_id,
         "date": that.data.date,
         "user_name": app.globalData.user_name
       },
@@ -113,9 +123,9 @@ Page({
       url: app.get_url() + "submit",
       method: 'POST',
       data: {
-        "dept_id": app.globalData.dept_info.dept_id,
+        "dept_id": that.data.dept_id,
         "date": that.data.date,
-        "submit_user": app.globalData.user_name,
+        "submit_user": that.data.nick_name,//that.data.submit_user,
         "extra_fields": that.data.extra_fields,
         "user_name": app.globalData.user_name,
         "comments": that.data.comments
@@ -177,6 +187,15 @@ Page({
       url: '../index/index'
     })
   },
+  bindPickerChange: function (e) {
+    var that = this
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value,
+      dept_id: that.data.dept_list[e.detail.value].dept_id
+    })
+    console.log("dept_id:", this.data.dept_id)
+  },
   bindDateChange: function (e) {
     console.log('Date发送选择改变，携带值为', e.detail.value)
     this.setData({
@@ -190,11 +209,41 @@ Page({
   onLoad: function (options) {
     if (app.globalData.userInfo != null) {
       this.setData({
-        date: app.globalData.today_str,
-        dept_name : app.globalData.dept_info.dept_name,
-        submit_user: app.globalData.user_name
+        nick_name: app.globalData.user_name,
+        date: app.globalData.today_str
       })
       var that = this
+      //获取网点列表  
+      wx.request({
+        url: app.get_url() + "branches",
+        header: {
+          "Content-Type": "application/json"
+        },
+        data: {
+          "user_name": app.globalData.user_name
+        },
+        success: function (res) {
+          console.log("/api/branches返回值：")
+          //console.log(res.data)
+          var branch_list = []
+          branch_list.push({ "dept_id": 999, "dept_name": "请选择" })
+          branch_list = branch_list.concat(res.data)
+          console.log(branch_list)
+          if (res.statusCode == 502) {
+            that.setData({
+              modalHidden4: false
+            })
+          } else {
+            that.setData({
+              dept_list: branch_list,
+              index: 999, //res.data[0].dept_id
+            })
+          }
+        },
+        fail: function (err) {
+          console.log(err)
+        }
+      })
       //获取字段名列表
       wx.request({
         url: app.get_url() + "fields_name",
@@ -215,12 +264,21 @@ Page({
             that.setData({
               fields_name: res.data,
             })
+            // var field_amount = res.data.length
+            // for (var i = 0; i < field_amount; i++) {
+            //   focus_list.push(false)
+            // }
+            // that.setData({
+            //   focus_list: focus_list,
+            // })
+            // console.log(that.data.focus_list)
           }
         },
         fail: function (err) {
           console.log(err)
         }
       })
+      // 页面初始化 options为页面跳转所带来的参数  
     } else {
       console.log('无获取昵称权限');
       this.setData({
@@ -240,8 +298,8 @@ Page({
     var t = e.currentTarget.dataset.t
     if (t == 'f') {
       var idd = e.currentTarget.dataset.idd
-      console.log(idd);      
-      var d = { idd: t}
+      console.log(idd);
+      var d = { idd: t }
       flist.add(idd)
     }
   },

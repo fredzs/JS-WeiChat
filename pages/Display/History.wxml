@@ -1,0 +1,43 @@
+<!--pages/Display/Display.wxml-->
+<view>
+  <view class="section">
+    <text class="field_name" space="true">{{user_name}},您可以查看[{{dept_name}}]的历史业绩</text>
+  </view>
+  <picker-view indicator-style="height: 30px;" style="width: 100%; height: 100px; margin:5px;" value="{{value}}" bindchange="bindChange">
+    <picker-view-column>
+      <view wx:for="{{years}}" class="picker-view-column" wx:key="">{{item}}年</view>
+    </picker-view-column>
+    <picker-view-column class="picker-view">
+      <view wx:for="{{months}}" class="picker-view-column" wx:key="">{{item}}月</view>
+    </picker-view-column>
+    <picker-view-column class="picker-view">
+      <view wx:for="{{days}}" class="picker-view-column" wx:key="">{{item}}日</view>
+    </picker-view-column>
+  </picker-view>
+</view>
+<view class="section">
+  <view class="section" hidden="{{modalHidden}}">
+    <text class="field_name" space="true">报送人姓名 :  </text>
+    <text class="field_value">{{submit_user}}</text>
+  </view>
+</view>
+<view class="section">
+  <view class="section" hidden="{{modalHidden}}">
+    <text class="field_name" space="true">报送时间 :  </text>
+    <text class="field_value">{{submit_time}}</text>
+  </view>
+</view>
+<view wx:for="{{extra_fields}}" wx:key="field_name2">
+  <view class="section" hidden="{{modalHidden}}">
+    <text class="field_name" space="true">{{item.field_name}} :  </text>
+    <text class="field_value">{{item.field_value}}</text>
+    <text class="field_value" wx:if="{{item.field_unit!=''}}"> ({{item.field_unit}})</text>
+  </view>
+</view>
+<view class="section">
+  <view class="section" hidden="{{modalHidden}}">
+    <text class="field_name" space="true">备注 :  </text>
+    <text wx:if="{{comments!=''}}" class="field_value">{{comments}}</text>
+    <text wx:else class="field_value">无</text>
+  </view>
+</view>

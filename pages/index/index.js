@@ -78,9 +78,32 @@ Page({
     })
   },
   Daily: function () {
-    wx.navigateTo({
-      url: '../Daily/Daily'
-    })
+    var that = this
+    var role = app.globalData.user_info["role"]
+    if (role == 'CM' || role == 'leader') {
+      wx.navigateTo({
+        url: '../Daily/Daily'
+      })
+    } else{
+      wx.navigateTo({
+        url: '../Daily/Admin'
+      })
+    }
+  },
+  History: function () {
+    var that = this
+    var role = app.globalData.user_info["role"]
+    if (role == 'CM' || role == 'leader') {
+      wx.navigateTo({
+        url: '../Display/History'
+      })
+    }
+    else {
+      that.setData({
+        toast1Hidden: false,
+        notice_str: '您是管理员，请直接进入管理员页面！'
+      });
+    }
   },
   bind_password_change: function (e) {
     console.log("输入密码改变：" + e.detail.value)
@@ -98,9 +121,18 @@ Page({
   },
   Manage: function () {
     var that = this
-    this.setData({
-      modalHidden: false
-    })
+    var role = app.globalData.user_info["role"]
+    if (role == 'admin' || role == 'super_admin') {
+      wx.navigateTo({
+        url: '../index/Manage'
+      })
+    }
+    else {
+      this.setData({
+        modalHidden: false
+      })
+    }
+
   },
   confirm_one: function () {
     var that = this

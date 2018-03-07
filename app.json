@@ -4,6 +4,7 @@
     "pages/index/Manage",
     "pages/logs/logs",
     "pages/Daily/Daily",
+    "pages/Daily/Admin",
     "pages/Admin/Admin",
     "pages/Check/Check",
     "pages/Display/Display",
@@ -12,7 +13,8 @@
     "pages/Fields/Create",
     "pages/Depts/Depts",
     "pages/Admin/Setting",
-    "pages/Email/Email"
+    "pages/Email/Email",
+    "pages/Display/History"
   ],
   "window": {
     "backgroundTextStyle": "light",
