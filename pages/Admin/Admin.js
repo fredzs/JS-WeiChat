@@ -1,8 +1,22 @@
 // pages/Admin/Admin.js
+var app = getApp();
 Page({
   data: {
   },
   onLoad: function (options) {
+    wx.request({
+      url: app.get_url() + "log",
+      method: 'POST',
+      header: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        "user_name": app.globalData.user_name,
+        "page": "/Admin/Admin",
+        "method": "browse",
+        "content": "后台维护页面"
+      }
+    })
   },
   fields_config: function () {
     wx.navigateTo({

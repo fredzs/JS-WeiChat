@@ -73,12 +73,15 @@ Page({
         method: 'POST',
         data: {
           "new_order": new_order,
-          "user_name": app.globalData.user_name
+          "user_name": app.globalData.user_name,
+          "page": "/Fields/Order",
         },
         header: {
           'Content-Type': 'application/json'
         },
         success: function (res) {
+          console.log("/api/create_field返回值：")
+          console.log("已排序字段")
         }
       })
       this.setData({
@@ -89,6 +92,19 @@ Page({
     }
   },
   onLoad: function (options) {
+    wx.request({
+      url: app.get_url() + "log",
+      method: 'POST',
+      header: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        "user_name": app.globalData.user_name,
+        "page": "/Fields/Order",
+        "method": "browse",
+        "content": "字段排序页面"
+      }
+    })
     var that = this
     wx.request({
       url: app.get_url() + "fields",
@@ -96,7 +112,8 @@ Page({
         "Content-Type": "application/json"
       },
       data:{
-        "user_name": app.globalData.user_name
+        "user_name": app.globalData.user_name,
+        "page": "/Fields/Order",
       },
       success: function (res) {
         console.log("/api/fields返回值：")

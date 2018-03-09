@@ -47,7 +47,7 @@ Page({
     return result
   },
   submint_user_input: function (e) {
-    console.log("报送人姓名改变：" + e.detail.value)
+    //console.log("报送人姓名改变：" + e.detail.value)
     this.setData({
       submit_user: e.detail.value
     })
@@ -80,12 +80,14 @@ Page({
       data: {
         "dept_id": app.globalData.dept_info.dept_id,
         "date": that.data.date,
-        "user_name": app.globalData.user_name
+        "user_name": app.globalData.user_name,
+        "page": "/Daily/Daily",
       },
       header: {
         "Content-Type": "application/json"
       },
       success: function (res) {
+        console.log("/api/find返回值：")
         console.log(res.data)
         var submit_user = res.data.submit_user
         var submit_time = res.data.submit_time
@@ -110,7 +112,7 @@ Page({
   submit: function () {
     var that = this;
     wx.request({
-      url: app.get_url() + "submit",
+      url: app.get_url() + "performance",
       method: 'POST',
       data: {
         "dept_id": app.globalData.dept_info.dept_id,
@@ -118,12 +120,14 @@ Page({
         "submit_user": app.globalData.user_name,
         "extra_fields": that.data.extra_fields,
         "user_name": app.globalData.user_name,
-        "comments": that.data.comments
+        "comments": that.data.comments,
+        "page": "/Daily/Daily",
       },
       header: {
         'Content-Type': 'application/json'
       },
       success: function (res) {
+        console.log("/api/performance返回值：")
         console.log(res.data)
         if (res.data == "success") {
           that.setData({
@@ -178,16 +182,25 @@ Page({
     })
   },
   bindDateChange: function (e) {
-    console.log('Date发送选择改变，携带值为', e.detail.value)
+    //console.log('Date发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
     })
   },
-  // bind_next: function (e) {
-  //   console.log('输入完毕，跳到下一个input', e.detail)
-  //   focus_list[e]
-  // },
   onLoad: function (options) {
+    wx.request({
+      url: app.get_url() + "log",
+      method: 'POST',
+      header: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        "user_name": app.globalData.user_name,
+        "page": "/Daily/Daily",
+        "method": "browse",
+        "content": "提交业绩页面"
+      }
+    })
     if (app.globalData.userInfo != null) {
       this.setData({
         date: app.globalData.today_str,
@@ -202,7 +215,8 @@ Page({
           "Content-Type": "application/json"
         },
         data: {
-          "user_name": app.globalData.user_name
+          "user_name": app.globalData.user_name,
+          "page": "/Daily/Daily",
         },
         success: function (res) {
           console.log("/api/fields_name返回值：")
@@ -227,7 +241,6 @@ Page({
         modalHidden6: false
       })
     }
-
   },
   bind_comments: function (e) {
     console.log('输入备注：' + e.detail.value);

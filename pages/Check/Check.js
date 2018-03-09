@@ -16,7 +16,6 @@ for (let i = 1; i <= 31; i++) {
 }
 Page({
   data: {
-    // text:"这是一个页面"  
     check_list: {},
     years: years,
     year: date.getFullYear(),
@@ -30,7 +29,7 @@ Page({
     length_2: 0,
   },
   bindChange: function (e) {
-    console.log('Date发送选择改变，携带值为', e.detail.value)
+    //console.log('Date发送选择改变，携带值为', e.detail.value)
     const val = e.detail.value
     this.setData({
       year: this.data.years[val[0]],
@@ -45,7 +44,8 @@ Page({
       },
       data: {
         "date": this.data.year + "-" + this.data.month + "-" + this.data.day,
-        "user_name": app.globalData.user_name
+        "user_name": app.globalData.user_name,
+        "page": "/Check/Check",
       },
       success: function (res) {
         console.log("/api/check返回值：")
@@ -64,18 +64,30 @@ Page({
       value: [this.data.year, this.data.month - 1, this.data.day - 1]
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
   onLoad: function (options) {
     var that = this
+    wx.request({
+      url: app.get_url() + "log",
+      method: 'POST',
+      header: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        "user_name": app.globalData.user_name,
+        "page": "/Check/Check",
+        "method": "browse",
+        "content": "每日报送情况页面"
+      }
+    })
     wx.request({
       url: app.get_url() + "check",
       header: {
         "Content-Type": "application/json"
       },
       data:{
-        "user_name": app.globalData.user_name
+        "user_name": app.globalData.user_name,
+        "page": "/Check/Check"
       },
       success: function (res) {
         console.log("/api/check返回值：")
@@ -85,9 +97,6 @@ Page({
           length_1: res.data.submission_list.length,
           length_2: res.data.unsubmission_list.length,
         })
-      },
-      fail: function (err) {
-        console.log(err)
       }
     })
     this.setData({

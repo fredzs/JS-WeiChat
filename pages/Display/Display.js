@@ -49,7 +49,8 @@ Page({
       },
       data: {
         "date": this.data.year + "-" + this.data.month + "-" + this.data.day,
-        "user_name": app.globalData.user_name
+        "user_name": app.globalData.user_name,
+        "page": "/Display/Display",
       },
       success: function (res) {
         console.log("/api/check返回值：")
@@ -67,17 +68,18 @@ Page({
         //console.log(that.data.dept - 1, that.data.length_1)
         if (that.data.depts.length != 0) {
           wx.request({
-            url: app.get_url() + "display",
+            url: app.get_url() + "performance",
             header: {
               "Content-Type": "application/json"
             },
             data: {
               "date": that.data.year + "-" + that.data.month + "-" + that.data.day,
               "dept_name": that.data.depts[that.data.dept - 1].dept_name,
-              "user_name": app.globalData.user_name
+              "user_name": app.globalData.user_name,
+              "page": "/Display/Display",
             },
             success: function (res) {
-              console.log("/api/display返回值：")
+              console.log("/api/performance返回值：")
               console.log(res.data)
               that.setData({
                 modalHidden: false,
@@ -104,6 +106,19 @@ Page({
   },
 
   onLoad: function (options) {
+    wx.request({
+      url: app.get_url() + "log",
+      method: 'POST',
+      header: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        "user_name": app.globalData.user_name,
+        "page": "/Display/Display",
+        "method": "browse",
+        "content": "浏览业绩页面(admin)"
+      }
+    })
     var that = this
     wx.request({
       url: app.get_url() + "check",
@@ -111,7 +126,8 @@ Page({
         "Content-Type": "application/json"
       },
       data:{
-        "user_name": app.globalData.user_name
+        "user_name": app.globalData.user_name,
+        "page": "/Display/Display",
       },
       success: function (res) {
         console.log("/api/check返回值：")
@@ -120,24 +136,23 @@ Page({
           depts: res.data.submission_list,
           length_1: res.data.submission_list.length,
         })
-        //console.log(that.data.depts)
         if (that.data.dept - 1 >= that.data.depts.length) {
           that.data.dept = that.data.depts.length
         }
-        //console.log(that.data.dept - 1, that.data.length_1)
         if (that.data.depts.length != 0) {
           wx.request({
-            url: app.get_url() + "display",
+            url: app.get_url() + "performance",
             header: {
               "Content-Type": "application/json"
             },
             data: {
               "date": app.globalData.today_str,
               "dept_name": that.data.depts[that.data.dept - 1].dept_name,
-              "user_name": app.globalData.user_name
+              "user_name": app.globalData.user_name,
+              "page": "/Display/Display",
             },
             success: function (res) {
-              console.log("/api/display返回值：")
+              console.log("/api/performance返回值：")
               console.log(res.data)
               that.setData({
                 modalHidden: false,

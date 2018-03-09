@@ -57,7 +57,7 @@ Page({
     return result
   },
   submint_user_input: function (e) {
-    console.log("报送人姓名改变：" + e.detail.value)
+    //console.log("报送人姓名改变：" + e.detail.value)
     this.setData({
       submit_user: e.detail.value
     })
@@ -90,12 +90,14 @@ Page({
       data: {
         "dept_id": that.data.dept_id,
         "date": that.data.date,
-        "user_name": app.globalData.user_name
+        "user_name": app.globalData.user_name,
+        "page": "/Daily/Admin",
       },
       header: {
         "Content-Type": "application/json"
       },
       success: function (res) {
+        console.log("/api/find返回值：")
         console.log(res.data)
         var submit_user = res.data.submit_user
         var submit_time = res.data.submit_time
@@ -120,7 +122,7 @@ Page({
   submit: function () {
     var that = this;
     wx.request({
-      url: app.get_url() + "submit",
+      url: app.get_url() + "performance",
       method: 'POST',
       data: {
         "dept_id": that.data.dept_id,
@@ -128,12 +130,14 @@ Page({
         "submit_user": that.data.nick_name,//that.data.submit_user,
         "extra_fields": that.data.extra_fields,
         "user_name": app.globalData.user_name,
-        "comments": that.data.comments
+        "comments": that.data.comments,
+        "page": "/Daily/Admin",
       },
       header: {
         'Content-Type': 'application/json'
       },
       success: function (res) {
+        console.log("/api/performance返回值：")
         console.log(res.data)
         if (res.data == "success") {
           that.setData({
@@ -189,7 +193,7 @@ Page({
   },
   bindPickerChange: function (e) {
     var that = this
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    //console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value,
       dept_id: that.data.dept_list[e.detail.value].dept_id
@@ -197,16 +201,25 @@ Page({
     console.log("dept_id:", this.data.dept_id)
   },
   bindDateChange: function (e) {
-    console.log('Date发送选择改变，携带值为', e.detail.value)
+    //console.log('Date发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
     })
   },
-  // bind_next: function (e) {
-  //   console.log('输入完毕，跳到下一个input', e.detail)
-  //   focus_list[e]
-  // },
   onLoad: function (options) {
+    wx.request({
+      url: app.get_url() + "log",
+      method: 'POST',
+      header: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        "user_name": app.globalData.user_name,
+        "method": "browse",
+        "page": "/Daily/Admin",
+        "content": "提交业绩页面(admin)"
+      }
+    })
     if (app.globalData.userInfo != null) {
       this.setData({
         nick_name: app.globalData.user_name,
@@ -220,11 +233,11 @@ Page({
           "Content-Type": "application/json"
         },
         data: {
-          "user_name": app.globalData.user_name
+          "user_name": app.globalData.user_name,
+          "page": "/Daily/Admin",
         },
         success: function (res) {
           console.log("/api/branches返回值：")
-          //console.log(res.data)
           var branch_list = []
           branch_list.push({ "dept_id": 999, "dept_name": "请选择" })
           branch_list = branch_list.concat(res.data)
@@ -251,7 +264,8 @@ Page({
           "Content-Type": "application/json"
         },
         data: {
-          "user_name": app.globalData.user_name
+          "user_name": app.globalData.user_name,
+          "page": "/Daily/Admin",
         },
         success: function (res) {
           console.log("/api/fields_name返回值：")
@@ -264,14 +278,6 @@ Page({
             that.setData({
               fields_name: res.data,
             })
-            // var field_amount = res.data.length
-            // for (var i = 0; i < field_amount; i++) {
-            //   focus_list.push(false)
-            // }
-            // that.setData({
-            //   focus_list: focus_list,
-            // })
-            // console.log(that.data.focus_list)
           }
         },
         fail: function (err) {

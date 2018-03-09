@@ -43,25 +43,42 @@ App({
                 url: that.get_url() + "user",
                 data: {
                   "nick_name": res.userInfo.nickName,
-                  "avatar_url": res.userInfo.avatarUrl
+                  "avatar_url": res.userInfo.avatarUrl,
+                  "page": "/index/index",
                 },
                 header: {
                   'Content-Type': 'application/json'
                 },
                 success: function (res) {
+                  console.log("/api/user返回值：")
                   console.log(res.data)
                   that.globalData.user_info = res.data
                   that.globalData.user_name = that.globalData.user_info.user_name
-
+                  wx.request({
+                    url: that.get_url() + "log",
+                    method: 'POST',
+                    header: {
+                      "Content-Type": "application/json"
+                    },
+                    data: {
+                      "user_name": that.globalData.user_name,
+                      "page": "/index/index",
+                      "method": "browse",
+                      "content": "用户登陆首页"
+                    }
+                  })
                   wx.request({
                     url: that.get_url() + "dept",
                     data: {
-                      "user_name": that.globalData.user_name
+                      "user_name": that.globalData.user_name,
+                      "dept_id": res.data.dept_id,
+                      "page": "/index/index",
                     },
                     header: {
                       'Content-Type': 'application/json'
                     },
                     success: function (res) {
+                      console.log("/api/dept返回值：")
                       console.log(res.data)
                       that.globalData.dept_info = res.data
                     }
@@ -89,7 +106,7 @@ App({
     request_url: 'https://fredirox.com/api/',
     local_url: 'https://127.0.0.1:5001/api/',
     test_url: 'https://fredirox.com/test/api/',
-    running_mode: "online_running",
+    running_mode: "developing",
     avatar_url: "",
   },
   get_url: function() {

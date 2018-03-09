@@ -44,17 +44,18 @@ Page({
     })
     var that = this
     wx.request({
-      url: app.get_url() + "display",
+      url: app.get_url() + "performance",
       header: {
         "Content-Type": "application/json"
       },
       data: {
         "date": that.data.year + "-" + that.data.month + "-" + that.data.day,
         "dept_name": app.globalData.dept_info.dept_name,
-        "user_name": that.data.user_name
+        "user_name": that.data.user_name,
+        "page": "/Check/History",
       },
       success: function (res) {
-        console.log("/api/display返回值：")
+        console.log("/api/performance返回值：")
         console.log(res.data)
         if (res.data.submit_user != "empty") {
           that.setData({
@@ -74,63 +75,57 @@ Page({
     that.setData({
       value: [that.data.year, that.data.month - 1, that.data.day - 1]
     })
-    // this.setData({
-    //   value: [this.data.year, this.data.month - 1, this.data.day - 1, this.data.dept - 1]
-    // })
   },
-
   onLoad: function (options) {
-    var that = this
-    this.setData({
-      user_name: app.globalData.user_name
-    })
     wx.request({
-      url: app.get_url() + "dept",
+      url: app.get_url() + "log",
+      method: 'POST',
       header: {
         "Content-Type": "application/json"
       },
       data: {
-        "user_name": that.data.user_name
+        "user_name": app.globalData.user_name,
+        "page": "/Check/History",
+        "method": "browse",
+        "content": "浏览业绩页面"
+      }
+    })
+    var that = this
+    this.setData({
+      user_name: app.globalData.user_name,
+      dept_name: app.globalData.dept_info.dept_name
+    })
+    wx.request({
+      url: app.get_url() + "performance",
+      header: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        "date": app.globalData.today_str,
+        "dept_name": that.data.dept_name,
+        "user_name": that.data.user_name,
+        "page": "/Check/History",
       },
       success: function (res) {
-        console.log("/api/dept返回值：")
+        console.log("/api/performance返回值：")
         console.log(res.data)
-        that.setData({
-          dept_name: app.globalData.dept_info.dept_name
-        })
-        wx.request({
-          url: app.get_url() + "display",
-          header: {
-            "Content-Type": "application/json"
-          },
-          data: {
-            "date": app.globalData.today_str,
-            "dept_name": that.data.dept_name,
-            "user_name": that.data.user_name
-          },
-          success: function (res) {
-            console.log("/api/display返回值：")
-            console.log(res.data)
-            if (res.data.submit_user != "empty") {
-              that.setData({
-                modalHidden: false,
-                submit_user: res.data.submit_user,
-                submit_time: res.data.submit_time,
-                comments: res.data.comments,
-                extra_fields: res.data.extra_fields,
-              })
-            } else {
-              that.setData({
-                modalHidden: true
-              })
-            }
-          },
-        }),
+        if (res.data.submit_user != "empty") {
           that.setData({
-            value: [date.getFullYear(), date.getMonth(), date.getDate() - 1]
+            modalHidden: false,
+            submit_user: res.data.submit_user,
+            submit_time: res.data.submit_time,
+            comments: res.data.comments,
+            extra_fields: res.data.extra_fields,
           })
+        } else {
+          that.setData({
+            modalHidden: true
+          })
+        }
       },
+    }),
+    that.setData({
+      value: [date.getFullYear(), date.getMonth(), date.getDate() - 1]
     })
-    
   },
 })

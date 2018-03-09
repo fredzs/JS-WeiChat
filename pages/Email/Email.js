@@ -15,10 +15,26 @@ Page({
   },
 
   onLoad: function (options) {
-
+    wx.request({
+      url: app.get_url() + "log",
+      method: 'POST',
+      header: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        "user_name": app.globalData.user_name,
+        "page": "/Email/Email",
+        "method": "browse",
+        "content": "业绩统计页面"
+      },
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
   },
   Day: function (e) {
     var that = this;
+    var count_only = e.currentTarget.dataset.count_only;
     wx.request({
       url: app.get_url() + "send_range_email",
       method: 'POST',
@@ -26,17 +42,24 @@ Page({
         "date_begin": that.data.date,
         "date_end": that.data.date,
         "user_name": app.globalData.user_name,
-        "count_only": e.currentTarget.dataset.count_only
+        "count_only": count_only,
+        "page": "/Email/Email",
       },
       header: {
         'Content-Type': 'application/json'
       },
       success: function (res) {
+        console.log("/api/send_range_email返回值：")
         console.log("单日统计：" + res.data)
+        var str=""
         if (res.data == "success"){
-          var str = '邮件发送成功!'
+          if (count_only) {
+            str = "统计完毕"
+          } else {
+            str = "邮件发送成功"
+          }
         } else {
-          var str = '邮件发送失败，请联系管理员!'
+          str = '邮件发送失败，请联系管理员!'
         }
         that.setData({
           toastHidden: false,
@@ -47,6 +70,7 @@ Page({
   },
   Range: function (e) {
     var that = this;
+    var count_only = e.currentTarget.dataset.count_only;
     wx.request({
       url: app.get_url() + "send_range_email",
       method: 'POST',
@@ -54,17 +78,24 @@ Page({
         "date_begin": that.data.date_begin,
         "date_end": that.data.date_end,
         "user_name": app.globalData.user_name,
-        "count_only": e.currentTarget.dataset.count_only
+        "count_only": count_only,
+        "page": "/Email/Email",
       },
       header: {
         'Content-Type': 'application/json'
       },
       success: function (res) {
+        console.log("/api/send_range_email返回值：")
         console.log("期间统计：" + res.data)
+        var str = ""
         if (res.data == "success") {
-          var str = '邮件发送成功!'
+          if (count_only) {
+            str = "统计完毕"
+          } else {
+            str = "邮件发送成功"
+          }
         } else {
-          var str = '邮件发送失败，请联系管理员!'
+          str = '邮件发送失败，请联系管理员!'
         }
         that.setData({
           toastHidden: false,

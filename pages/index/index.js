@@ -51,9 +51,10 @@ Page({
     wx.authorize({
       scope: 'scope.userInfo',
       success(res) {
-        console.log('获取头像、昵称授权成功')
+        //console.log('获取头像、昵称授权成功')
         wx.getUserInfo({  //获得个人信息
           success: function (res) {
+            console.log("wx.authorize返回值：")
             console.log(res.userInfo)
             app.globalData.userInfo = res.userInfo
             that.setData({
@@ -80,7 +81,7 @@ Page({
   Daily: function () {
     var that = this
     var role = app.globalData.user_info["role"]
-    if (role == 'CM' || role == 'leader') {
+    if (role == 'CM' || role == 'leader' || role == 'vice_leader' ) {
       wx.navigateTo({
         url: '../Daily/Daily'
       })
@@ -97,7 +98,7 @@ Page({
   History: function () {
     var that = this
     var role = app.globalData.user_info["role"]
-    if (role == 'CM' || role == 'leader') {
+    if (role == 'CM' || role == 'leader' || role == 'vice_leader') {
       wx.navigateTo({
         url: '../Display/History'
       })
@@ -149,12 +150,14 @@ Page({
       url: app.get_url() + "admin",
       data: {
         "admin_password": that.data.admin_password,
-        "user_name": app.globalData.user_name
+        "user_name": app.globalData.user_name,
+        "page": "/index/index",
       },
       header: {
         'Content-Type': 'application/json'
       },
       success: function (res) {
+        console.log("/api/admin返回值：")
         console.log(res.data)
         that.setData({
           admin_password: ""
