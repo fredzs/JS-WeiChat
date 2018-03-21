@@ -23,9 +23,9 @@ Page({
       url: '../Check/Check'
     })
   },
-  Email: function () {
+  Statistics: function () {
     wx.navigateTo({
-      url: '../Email/Email'
+      url: '../Statistics/Statistics'
     })
   },
   Display: function () {

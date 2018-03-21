@@ -23,7 +23,7 @@ Page({
       },
       data: {
         "user_name": app.globalData.user_name,
-        "page": "/Email/Email",
+        "page": "/Statistics/Statistics",
         "method": "browse",
         "content": "业绩统计页面"
       },
@@ -43,7 +43,7 @@ Page({
         "date_end": that.data.date,
         "user_name": app.globalData.user_name,
         "count_only": count_only,
-        "page": "/Email/Email",
+        "page": "/Statistics/Statistics",
       },
       header: {
         'Content-Type': 'application/json'
@@ -79,7 +79,7 @@ Page({
         "date_end": that.data.date_end,
         "user_name": app.globalData.user_name,
         "count_only": count_only,
-        "page": "/Email/Email",
+        "page": "/Statistics/Statistics",
       },
       header: {
         'Content-Type': 'application/json'

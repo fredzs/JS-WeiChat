@@ -1,6 +1,6 @@
 <!--pages/Email/Email.wxml-->
 <view class="container_1">
-  <text class="subtitle">单日汇总</text>
+  <text class="subtitle">单日业绩</text>
   <view>
     <picker mode="date" value="{{date}}" start="2018-02-01" end="{{date}}" bindchange="bindDateChange">
       <view class="picker">
@@ -8,13 +8,13 @@
       </view>
     </picker>
     <view class="button">
-      <button type="primary" bindtap="Day" data-count_only="true">生成统计数据</button>
+      <button type="primary" bindtap="statistics" data-mode="daily">汇总单日业绩</button>
     </view>
     <view class="button">
-      <button type="primary" bindtap="Day" data-count_only="false">生成并发送邮件</button>
+      <button type="primary" bindtap="email" data-mode="">汇总并发送邮件</button>
     </view>
   </view>
-  <text class="subtitle">时间段汇总</text>
+  <text class="subtitle">时间段业绩</text>
   <view>
     <view class="date">
       <view class="left">
@@ -35,23 +35,24 @@
       </view>
     </view>
     <view class="button_1">
-      <button type="primary" bindtap="Range" data-count_only="true">生成统计数据</button>
+      <button type="primary" bindtap="statistics" data-mode="range">汇总多日业绩</button>
     </view>
     <view class="button_1">
-      <button type="primary" bindtap="Range" data-count_only="false">生成并发送邮件</button>
+      <button type="primary" bindtap="statistics" data-mode="detail">查看历史业绩</button>
+    </view>
+    <view class="button_1">
+      <button type="primary" bindtap="email" data-count_only="false">生成并发送邮件</button>
     </view>
   </view>
-  <text class="subtitle">自定义汇总</text>
+  <!-- <text class="subtitle">自定义汇总</text>
   <view>
     <view class="button">
       <button type="primary" bindtap="">统计（开发中）</button>
     </view>
-  </view>
-<text>统计数据请在</text>
-<text selectable="true">https://www.fredirox.com/statistics/</text>
-<text>和</text>
-<text selectable="true">https://www.fredirox.com/xls/</text>
-<text>查看</text>
+  </view> -->
+  <text>统计数据请在以下网址查看:</text>
+  <text selectable="true">https://www.fredirox.com/statistics/</text>
+  <text selectable="true">https://www.fredirox.com/xls/</text>
 </view>
 <!-- 黑框提示并消失 -->
 <toast hidden="{{toastHidden}}" bindchange="toastChange">
