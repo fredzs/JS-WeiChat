@@ -15,6 +15,21 @@ Page({
     field_type: 0,
     field_unit: ""
   },
+  onLoad: function (options) {
+    wx.request({
+      url: app.get_url() + "log",
+      method: 'POST',
+      header: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        "user_name": app.globalData.user_name,
+        "page": "/Fields/Create",
+        "method": "browse",
+        "content": "新增字段页面"
+      }
+    })
+  },
   check_input: function () {
     if (this.data.field_name == "") {
       return 1
@@ -53,7 +68,6 @@ Page({
   },
   confirm_one: function () {
     var that = this;
-    console.log(this.data)
     wx.request({
       url: app.get_url() + "create_field",
       method: 'POST',
@@ -61,26 +75,28 @@ Page({
         "field_name": that.data.field_name,
         "field_type": that.data.field_type[0],
         "field_unit": that.data.field_unit,
-        "user_name": app.globalData.user_name
+        "user_name": app.globalData.user_name,
+        "page": "/Fields/Create",
       },
       header: {
         'Content-Type': 'application/json'
       },
       success: function (res) {
+        console.log("/api/create_field返回值：")
         console.log(res.data)
-        that.setData({
-          modalHidden: true,
-          toast1Hidden: false,
-        })
         if (res.data=="success"){
           that.setData({
             notice_str: '提交成功'
           });
         } else{
           that.setData({
-            notice_str: '提交失败：' + res.data
+            notice_str: '提交失败'
           });
         }
+        that.setData({
+          modalHidden: true,
+          toast1Hidden: false,
+        })
       }
     })
   },
@@ -94,7 +110,7 @@ Page({
   }, 
   bind_name_change: function (e) {
     var that = this
-    console.log('field_name发送选择改变，携带值为', e.detail.value)
+    //console.log('field_name发送选择改变，携带值为', e.detail.value)
     this.setData({
       field_name: e.detail.value,
     })
@@ -106,7 +122,7 @@ Page({
     })
   },
   bind_type_change: function (e) {
-    console.log('field_type发送选择改变，携带值为', e.detail.value)
+    //console.log('field_type发送选择改变，携带值为', e.detail.value)
     const val = e.detail.value
     this.setData({
       field_type: e.detail.value,
@@ -114,7 +130,7 @@ Page({
   },
   bind_unit_change: function (e) {
     var that = this
-    console.log('field_unit发送选择改变，携带值为', e.detail.value)
+    //console.log('field_unit发送选择改变，携带值为', e.detail.value)
     this.setData({
       field_unit: e.detail.value,
     })
@@ -152,7 +168,7 @@ Page({
     })
   },
   formSubmit: function (e) {
-    console.log('form发生了submit事件');
+    //console.log('form发生了submit事件');
     var check = this.check_input();
     if (check == 1){
       this.modalTap3();
@@ -165,7 +181,7 @@ Page({
     }
   },
   formReset: function () {
-    console.log('form发生了reset事件');
+    //console.log('form发生了reset事件');
     this.modalTap2();
   }
 })

@@ -11,6 +11,9 @@
     <button type="primary" bindtap="Daily">报送对公营销业绩</button>
   </view>
   <view class="button">
+    <button type="primary" bindtap="History">查看历史报送记录</button>
+  </view>
+  <view class="button">
     <button type="primary" bindtap="Manage">管理员页面</button>
   </view>
   <view class="usermotto">

@@ -1,0 +1,32 @@
+/* pages/Display/Display.wxss */
+
+#display {
+  background: #f5f5f5;
+}
+
+.extra_fields {
+  font-size: 16px;
+}
+
+.picker-view-column {
+  line-height: 30px;
+  width: 80%;
+  font-size: 16px;
+}
+
+.section {
+  clear: both;
+  width: 100%;
+  margin: 5px;
+}
+
+.field_name {
+  font-size: 16px;
+  padding-top: 10px;
+  font-weight: 600;
+}
+
+.field_value {
+  font-size: 16px;
+  padding-top: 12px;
+}

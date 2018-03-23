@@ -1,18 +1,18 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/index/Manage",
-    "pages/logs/logs",
-    "pages/Daily/Daily",
     "pages/Admin/Admin",
     "pages/Check/Check",
+    "pages/Daily/Admin",
+    "pages/Daily/Daily",
     "pages/Display/Display",
+    "pages/Display/History",
+    "pages/Statistics/Statistics",
     "pages/Fields/Fields",
     "pages/Fields/Order",
     "pages/Fields/Create",
-    "pages/Depts/Depts",
-    "pages/Admin/Setting",
-    "pages/Email/Email"
+    "pages/index/Manage",
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",

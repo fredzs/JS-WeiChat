@@ -9,20 +9,20 @@
 
 .section_title_short1 {
   float: left;
-  width: 15%;
+  width: 20%;
   font-size: 15px;
   padding-top: 5px;
 }
 
 .section_title_short2 {
   float: left;
-  width: 18%;
+  width: 20%;
   font-size: 13px;
 }
 
 .section_title_short3 {
   float: left;
-  width: 15%;
+  width: 20%;
   font-size: 15px;
   padding-left: 10px;
   padding-top: 5px;
@@ -30,14 +30,14 @@
 
 .section_title_short4 {
   float: left;
-  width: 16%;
+  width: 20%;
   height: 80%;
   padding-right: 5px;
 }
 
 .section_title_short5 {
   float: left;
-  width: 15%;
+  width: 20%;
   font-size: 15px;
 }
 

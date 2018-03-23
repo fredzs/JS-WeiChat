@@ -51,9 +51,10 @@ Page({
     wx.authorize({
       scope: 'scope.userInfo',
       success(res) {
-        console.log('获取头像、昵称授权成功')
+        //console.log('获取头像、昵称授权成功')
         wx.getUserInfo({  //获得个人信息
           success: function (res) {
+            console.log("wx.authorize返回值：")
             console.log(res.userInfo)
             app.globalData.userInfo = res.userInfo
             that.setData({
@@ -78,9 +79,40 @@ Page({
     })
   },
   Daily: function () {
-    wx.navigateTo({
-      url: '../Daily/Daily'
-    })
+    var that = this
+    var role = app.globalData.user_info["role"]
+    if (role == 'CM' || role == 'leader' || role == 'vice_leader' ) {
+      wx.navigateTo({
+        url: '../Daily/Daily'
+      })
+    } else if (role == 'admin' || role == 'super_admin') {
+      wx.navigateTo({
+        url: '../Daily/Admin'
+      })
+    } else {
+      wx.navigateTo({
+        url: '../Daily/Admin'
+      })
+    }
+  },
+  History: function () {
+    var that = this
+    var role = app.globalData.user_info["role"]
+    if (role == 'CM' || role == 'leader' || role == 'vice_leader') {
+      wx.navigateTo({
+        url: '../Display/History'
+      })
+    } else if (role == 'admin' || role == 'super_admin') {
+      that.setData({
+        toast1Hidden: false,
+        notice_str: '您是管理员，请直接进入管理员页面！'
+      });
+    } else{
+      that.setData({
+        toast1Hidden: false,
+        notice_str: '您没有权限，请联系管理员！'
+      });
+    }
   },
   bind_password_change: function (e) {
     console.log("输入密码改变：" + e.detail.value)
@@ -98,9 +130,18 @@ Page({
   },
   Manage: function () {
     var that = this
-    this.setData({
-      modalHidden: false
-    })
+    var role = app.globalData.user_info["role"]
+    if (role == 'admin' || role == 'super_admin') {
+      wx.navigateTo({
+        url: '../index/Manage'
+      })
+    }
+    else {
+      this.setData({
+        modalHidden: false
+      })
+    }
+
   },
   confirm_one: function () {
     var that = this
@@ -109,12 +150,14 @@ Page({
       url: app.get_url() + "admin",
       data: {
         "admin_password": that.data.admin_password,
-        "user_name": app.globalData.user_name
+        "user_name": app.globalData.user_name,
+        "page": "/index/index",
       },
       header: {
         'Content-Type': 'application/json'
       },
       success: function (res) {
+        console.log("/api/admin返回值：")
         console.log(res.data)
         that.setData({
           admin_password: ""

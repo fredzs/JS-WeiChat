@@ -2,7 +2,20 @@
 
 .button {
   margin-top: 5px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+.button_1 {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 60%;
+  padding-left: 55px;
+}
+
+.subtitle {
+  padding-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .date {

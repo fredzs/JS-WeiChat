@@ -64,7 +64,3 @@
   float: left;
   font-size: 16px;
 }
-
-.text{
-  padding-top: 5px;
-}

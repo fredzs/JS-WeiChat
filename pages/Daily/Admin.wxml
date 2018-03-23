@@ -1,14 +1,21 @@
 <view id="daily">
   <view class="section">
     <view class="section_title_short">报送人姓名:</view>
-    <view class="text">
-      <text name="submit_user" disabled='true'>{{submit_user}}</text>
+    <view class='form_group'>
+      <input name="submit_user" value='{{nick_name}}' class='input_text' bindblur="submint_user_input" disabled='true' />
     </view>
   </view>
   <view class="section">
     <view class="section_title_short">网点名称:</view>
-    <view class="text">
-      <text class="dept_name" disabled='true'>{{dept_name}}</text>
+    <view class='form_group'>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{dept_list}}" range-key="dept_name">
+        <view wx:if="{{index!=999}}" class="picker">
+          {{dept_list[index].dept_name}}
+        </view>
+        <view wx:else class="picker">
+          请选择
+        </view>
+      </picker>
     </view>
   </view>
   <view class="section">
@@ -34,9 +41,8 @@
         </view>
       </view>
       <view class="section">
-        <input wx:if="{{fields_name[index].field_type == 'string'}}" type='text' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='100' cursor-spacing="120" />
-        <input wx:if="{{fields_name[index].field_type == 'float'}}" type='digit' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='10' cursor-spacing="120" bindblur='bind_float' data-t='f' data-idd='{{fields_name[index].field_id}}'
-        />
+        <input wx:if="{{fields_name[index].field_type == 'string'}}" type='text' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='100' cursor-spacing="120"/>
+        <input wx:if="{{fields_name[index].field_type == 'float'}}" type='digit' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='10' cursor-spacing="120" bindblur='bind_float' data-t='f' data-idd='{{fields_name[index].field_id}}'/>
         <input wx:if="{{fields_name[index].field_type == 'int'}}" type='number' name="{{fields_name[index].field_id}}" class='input_text' value="" confirm-type='done' maxlength='5' cursor-spacing="120" />
       </view>
     </view>
@@ -56,7 +62,7 @@
   <!-- 确认框 及 提示框 -->
   <view class="page_bd">
     <modal title="确认" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">
-      确认[日期]正确，并提交么？
+      确认[日期]和[网点名称]正确，并提交么？
     </modal>
     <modal title="业绩已存在" confirm-text="覆盖" cancel-text="再检查一下" hidden="{{modalHidden5}}" mask bindconfirm="confirm_two" bindcancel="cancel_one">
       该业绩已由{{submit_user}}于{{submit_time}}报送。请确认网点名和日期正确，重复提交将覆盖原业绩，是否继续？

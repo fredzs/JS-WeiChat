@@ -12,6 +12,7 @@
         </view>
       </picker>
     </view>
+
     <view class="section_title_short3">可用：</view>
     <view wx:if="{{item.status==true}}">
       <view class="section_title_short4">
@@ -23,9 +24,22 @@
         <switch bindchange="bindSwitchChange" value="{{fields[index].status}}" data-index="{{index}}" data-id="{{fields[index].field_id}}" />
       </view>
     </view>
+
     <view class="section_title_short1">单位：</view>
     <view class='section_title_short5'>
       <input name="field_unit" value='{{fields[index].field_unit}}' class='input-text' bindblur="bind_unit_change" data-index="{{index}}" data-id="{{fields[index].field_id}}" />
+    </view>
+
+    <view class="section_title_short3">统计：</view>
+    <view wx:if="{{item.statistics==true}}">
+      <view class="section_title_short6">
+        <switch checked bindchange="bindSwitchChange2" value="{{fields[index].statistics}}" data-index="{{index}}" data-id="{{fields[index].field_id}}" />
+      </view>
+    </view>
+    <view wx:else>
+      <view class="section_title_short6">
+        <switch bindchange="bindSwitchChange2" value="{{fields[index].statistics}}" data-index="{{index}}" data-id="{{fields[index].field_id}}" />
+      </view>
     </view>
   </view>
 </view>
