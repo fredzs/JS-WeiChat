@@ -2,7 +2,7 @@
 <view class="container_1">
   <text class="subtitle">单日业绩</text>
   <view>
-    <picker mode="date" value="{{date}}" start="2018-02-01" end="{{date}}" bindchange="bindDateChange">
+    <picker mode="date" value="{{date}}" start="2018-02-01" end="{{today}}" bindchange="bindDateChange">
       <view class="picker">
         {{date}}
       </view>
@@ -18,7 +18,7 @@
   <view>
     <view class="date">
       <view class="left">
-        <picker mode="date" value="{{date_begin}}" start="2018-02-01" end="{{date_end}}" bindchange="bindDateBeginChange">
+        <picker mode="date" value="{{date_begin}}" start="2018-02-01" end="{{today}}" bindchange="bindDateBeginChange">
           <text>起始日期：</text>
           <view class="picker">
             {{date_begin}}
@@ -26,7 +26,7 @@
         </picker>
       </view>
       <view class="right">
-        <picker mode="date" value="{{date_end}}" start="2018-02-01" end="{{date_end}}" bindchange="bindDateEndChange">
+        <picker mode="date" value="{{date_end}}" start="2018-02-01" end="{{today}}" bindchange="bindDateEndChange">
           <text>终止日期：</text>
           <view class="picker">
             {{date_end}}

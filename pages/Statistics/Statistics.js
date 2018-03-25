@@ -3,6 +3,7 @@ var app = getApp();
 Page({
 
   data: {
+    today: app.globalData.today_str,
     date: app.globalData.today_str,
     date_begin: "2018-03-01",
     date_end: app.globalData.today_str,
