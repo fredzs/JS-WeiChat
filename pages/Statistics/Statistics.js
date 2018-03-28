@@ -36,12 +36,20 @@ Page({
   statistics: function (e) {
     var that = this;
     var mode = e.currentTarget.dataset.mode;
+    var t1,t2;
+    if (mode=="daily"){
+      t1 = that.data.date;
+      t2 = that.data.date;
+    } else {
+      t1 = that.data.date_begin;
+      t2 = that.data.date_end;
+    }
     wx.request({
       url: app.get_url() + "statistics",
       method: 'GET',
       data: {
-        "date_begin": that.data.date_begin,
-        "date_end": that.data.date_end,
+        "date_begin": t1,
+        "date_end": t2,
         "user_name": app.globalData.user_name,
         "mode": mode,
         "page": "/Statistics/Statistics",
@@ -69,12 +77,20 @@ Page({
   email: function (e) {
     var that = this;
     var mode = e.currentTarget.dataset.mode;
+    var t1,t2;
+    if (mode == "daily") {
+      t1 = that.data.date;
+      t2 = that.data.date;
+    } else {
+      t1 = that.data.date_begin;
+      t2 = that.data.date_end;
+    }
     wx.request({
       url: app.get_url() + "email",
       method: 'GET',
       data: {
-        "date_begin": that.data.date_begin,
-        "date_end": that.data.date_end,
+        "date_begin": t1,
+        "date_end": t2,
         "user_name": app.globalData.user_name,
         "mode": mode,
         "page": "/Statistics/Statistics",
