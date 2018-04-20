@@ -5,14 +5,14 @@ Page({
   },
   onLoad: function (options) {
     wx.request({
-      url: app.get_url() + "log",
+      url: app.get_url() + "logs",
       method: 'POST',
       header: {
         "Content-Type": "application/json"
       },
       data: {
         "user_name": app.globalData.user_name,
-        "page": "/index/Manage",
+        "page": "/WeChat/index/Manage",
         "method": "browse",
         "content": "管理员页面"
       }

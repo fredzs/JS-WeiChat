@@ -17,14 +17,14 @@ Page({
 
   onLoad: function (options) {
     wx.request({
-      url: app.get_url() + "log",
+      url: app.get_url() + "logs",
       method: 'POST',
       header: {
         "Content-Type": "application/json"
       },
       data: {
         "user_name": app.globalData.user_name,
-        "page": "/Statistics/Statistics",
+        "page": "/WeChat/Statistics/Statistics",
         "method": "browse",
         "content": "业绩统计页面"
       },
@@ -66,7 +66,7 @@ Page({
           str = "统计完毕"
         } else {
           str = '统计失败，请联系管理员!'
-        }
+        }e
         that.setData({
           toastHidden: false,
           notice_str: str

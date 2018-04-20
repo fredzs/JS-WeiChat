@@ -17,14 +17,14 @@ Page({
   },
   onLoad: function (options) {
     wx.request({
-      url: app.get_url() + "log",
+      url: app.get_url() + "logs",
       method: 'POST',
       header: {
         "Content-Type": "application/json"
       },
       data: {
         "user_name": app.globalData.user_name,
-        "page": "/Fields/Create",
+        "page": "/WeChat/Fields/Create",
         "method": "browse",
         "content": "新增字段页面"
       }
@@ -69,7 +69,7 @@ Page({
   confirm_one: function () {
     var that = this;
     wx.request({
-      url: app.get_url() + "create_field",
+      url: app.get_url() + "fields",
       method: 'POST',
       data: {
         "field_name": that.data.field_name,
@@ -82,7 +82,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (res) {
-        console.log("/api/create_field返回值：")
+        console.log("/api/fields 返回值：")
         console.log(res.data)
         if (res.data=="success"){
           that.setData({

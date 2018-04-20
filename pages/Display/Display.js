@@ -43,7 +43,7 @@ Page({
     })
     var that = this
     wx.request({
-      url: app.get_url() + "check",
+      url: app.get_url() + "submission",
       header: {
         "Content-Type": "application/json"
       },
@@ -53,7 +53,7 @@ Page({
         "page": "/Display/Display",
       },
       success: function (res) {
-        console.log("/api/check返回值：")
+        console.log("/api/submission 返回值：")
         console.log(res.data)
         that.setData({
           depts: res.data.submission_list,
@@ -107,21 +107,21 @@ Page({
 
   onLoad: function (options) {
     wx.request({
-      url: app.get_url() + "log",
+      url: app.get_url() + "logs",
       method: 'POST',
       header: {
         "Content-Type": "application/json"
       },
       data: {
         "user_name": app.globalData.user_name,
-        "page": "/Display/Display",
+        "page": "/WeChat/Display/Display",
         "method": "browse",
         "content": "浏览业绩页面(admin)"
       }
     })
     var that = this
     wx.request({
-      url: app.get_url() + "check",
+      url: app.get_url() + "submission",
       header: {
         "Content-Type": "application/json"
       },
@@ -130,7 +130,7 @@ Page({
         "page": "/Display/Display",
       },
       success: function (res) {
-        console.log("/api/check返回值：")
+        console.log("/api/submission 返回值：")
         console.log(res.data)
         that.setData({
           depts: res.data.submission_list,

@@ -11,18 +11,19 @@ Page({
   },
   onLoad: function (options) {
     wx.request({
-      url: app.get_url() + "log",
+      url: app.get_url() + "logs",
       method: 'POST',
       header: {
         "Content-Type": "application/json"
       },
       data: {
         "user_name": app.globalData.user_name,
-        "page": "/Fields/Fields",
+        "page": "/WeChat/Fields/Fields",
         "method": "browse",
         "content": "字段配置页面"
       },
       success: function (res) {
+        console.log("/api/log 返回值：")
         console.log(res.data)
       }
     })
@@ -50,8 +51,8 @@ Page({
     var that = this
     //console.log('field_unit改变，携带值为', e.detail.value)
     wx.request({
-      url: app.get_url() + "update_field",
-      method: 'POST',
+      url: app.get_url() + "fields",
+      method: 'PATCH',
       data: {
         "field_id": e.currentTarget.dataset.id,
         "update_k": "field_unit",
@@ -76,8 +77,8 @@ Page({
     var that = this
     //console.log('picker发送选择改变，携带值为', this.data.type_list[e.detail.value])
     wx.request({
-      url: app.get_url() + "update_field",
-      method: 'POST',
+      url: app.get_url() + "fields",
+      method: 'PATCH',
       data: {
         "field_id": e.currentTarget.dataset.id,
         "update_k": "field_type",
@@ -107,8 +108,8 @@ Page({
     var that = this
     //console.log('picker发送选择改变，携带值为', e.detail.value)
     wx.request({
-      url: app.get_url() + "update_field",
-      method: 'POST',
+      url: app.get_url() + "fields",
+      method: 'PATCH',
       data: {
         "field_id": e.currentTarget.dataset.id,
         "update_k": "status",
@@ -138,10 +139,9 @@ Page({
     var that = this
     //console.log('picker发送选择改变，携带值为', e.detail.value)
     wx.request({
-      url: app.get_url() + "update_field",
-      method: 'POST',
+      url: app.get_url() + "fields" + "/" + e.currentTarget.dataset.id,
+      method: 'PUT',
       data: {
-        "field_id": e.currentTarget.dataset.id,
         "update_k": "statistics",
         "update_v": that.data.statistics_index[e.detail.value],
         "user_name": app.globalData.user_name,

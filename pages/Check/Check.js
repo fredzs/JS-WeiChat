@@ -38,7 +38,7 @@ Page({
     })
     var that = this
     wx.request({
-      url: app.get_url()+ "check",
+      url: app.get_url() + "submission",
       header: {
         "Content-Type": "application/json"
       },
@@ -48,7 +48,7 @@ Page({
         "page": "/Check/Check",
       },
       success: function (res) {
-        console.log("/api/check返回值：")
+        console.log("/api/submission 返回值：")
         console.log(res.data)
         that.setData({
           check_list: res.data,
@@ -68,20 +68,20 @@ Page({
   onLoad: function (options) {
     var that = this
     wx.request({
-      url: app.get_url() + "log",
+      url: app.get_url() + "logs",
       method: 'POST',
       header: {
         "Content-Type": "application/json"
       },
       data: {
         "user_name": app.globalData.user_name,
-        "page": "/Check/Check",
+        "page": "/WeChat/Check/Check",
         "method": "browse",
         "content": "每日报送情况页面"
       }
     })
     wx.request({
-      url: app.get_url() + "check",
+      url: app.get_url() + "submission",
       header: {
         "Content-Type": "application/json"
       },
@@ -90,7 +90,7 @@ Page({
         "page": "/Check/Check"
       },
       success: function (res) {
-        console.log("/api/check返回值：")
+        console.log("/api/submission 返回值：")
         console.log(res.data)
         that.setData({
           check_list: res.data,

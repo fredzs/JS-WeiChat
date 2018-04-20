@@ -86,7 +86,7 @@ Page({
   confirm_one: function () {
     var that = this;
     wx.request({
-      url: app.get_url() + "find",
+      url: app.get_url() + "performance_submit_info",
       data: {
         "dept_id": that.data.dept_id,
         "date": that.data.date,
@@ -97,7 +97,7 @@ Page({
         "Content-Type": "application/json"
       },
       success: function (res) {
-        console.log("/api/find返回值：")
+        console.log("/api/performance_submit_info 返回值：")
         console.log(res.data)
         var submit_user = res.data.submit_user
         var submit_time = res.data.submit_time
@@ -208,7 +208,7 @@ Page({
   },
   onLoad: function (options) {
     wx.request({
-      url: app.get_url() + "log",
+      url: app.get_url() + "logs",
       method: 'POST',
       header: {
         "Content-Type": "application/json"
@@ -216,7 +216,7 @@ Page({
       data: {
         "user_name": app.globalData.user_name,
         "method": "browse",
-        "page": "/Daily/Admin",
+        "page": "/WeChat/Daily/Admin",
         "content": "提交业绩页面(admin)"
       }
     })

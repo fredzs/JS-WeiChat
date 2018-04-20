@@ -78,14 +78,14 @@ Page({
   },
   onLoad: function (options) {
     wx.request({
-      url: app.get_url() + "log",
+      url: app.get_url() + "logs",
       method: 'POST',
       header: {
         "Content-Type": "application/json"
       },
       data: {
         "user_name": app.globalData.user_name,
-        "page": "/Check/History",
+        "page": "/WeChat/Check/History",
         "method": "browse",
         "content": "浏览业绩页面"
       }

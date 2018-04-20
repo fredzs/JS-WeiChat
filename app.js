@@ -40,7 +40,7 @@ App({
                 that.globalData.avatar_url = res.userInfo.avatarUrl
               };
               wx.request({
-                url: that.get_url() + "user",
+                url: that.get_url() + "users",
                 data: {
                   "nick_name": res.userInfo.nickName,
                   "avatar_url": res.userInfo.avatarUrl,
@@ -50,12 +50,12 @@ App({
                   'Content-Type': 'application/json'
                 },
                 success: function (res) {
-                  console.log("/api/user返回值：")
+                  console.log("/api/users 返回值：")
                   console.log(res.data)
                   that.globalData.user_info = res.data
                   that.globalData.user_name = that.globalData.user_info.user_name
                   wx.request({
-                    url: that.get_url() + "log",
+                    url: that.get_url() + "logs",
                     method: 'POST',
                     header: {
                       "Content-Type": "application/json"
@@ -106,7 +106,7 @@ App({
     request_url: 'https://fredirox.com/api/',
     local_url: 'https://127.0.0.1:5001/api/',
     test_url: 'https://fredirox.com/test/api/',
-    running_mode: "online_running",
+    running_mode: "local_testing",
     avatar_url: "",
   },
   get_url: function() {
